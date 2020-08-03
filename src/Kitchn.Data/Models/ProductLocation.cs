@@ -1,6 +1,6 @@
 using System;
 
-namespace Kitchn.Data
+namespace Kitchn.Data.Models
 {
 	/// <summary>
 	/// Product Location model
