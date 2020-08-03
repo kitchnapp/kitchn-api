@@ -16,5 +16,10 @@ namespace Kitchn.Data
 		/// Name of this product
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Default store location of this product
+		/// </summary>
+		public Guid DefaultProductLocationId { get; set; }
 	}
 }
