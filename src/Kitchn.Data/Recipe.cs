@@ -28,6 +28,11 @@ namespace Kitchn.Data
 		public List<Guid> RecipeInstructionIds { get; set; }
 
 		/// <summary>
+		/// Category Id's of this recipe
+		/// </summary>
+		public List<Guid> RecipeCategoryIds { get; set; }
+
+		/// <summary>
 		/// Rating of this recipe
 		/// </summary>
 		public int Rating { get; set; }
