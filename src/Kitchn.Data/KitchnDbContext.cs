@@ -36,6 +36,11 @@ namespace Kitchn.Data
 				new ReadFromSeed<Measurement>("Seeds/measurements.yaml")
 					.GetObjects()
 			);
+
+			modelBuilder.Entity<MeasurementConversion>().HasData(
+				new ReadFromSeed<MeasurementConversion>("Seeds/measurementConversions.yaml")
+					.GetObjects()
+			);
 		}
 
 		/// <summary>
@@ -52,5 +57,10 @@ namespace Kitchn.Data
 		/// List of measurements
 		/// </summary>
 		public DbSet<Models.Measurement> Measurements { get; set; }
+
+		/// <summary>
+		/// List of measurements
+		/// </summary>
+		public DbSet<Models.MeasurementConversion> MeasurementConversions { get; set; }
 	}
 }

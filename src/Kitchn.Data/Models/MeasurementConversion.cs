@@ -5,7 +5,7 @@ namespace Kitchn.Data.Models
 	/// <summary>
 	/// Measurement Conversions model
 	/// </summary>
-	public class MeasurementConversions
+	public class MeasurementConversion
 	{
 		/// <summary>
 		/// ID of this measurement conversion
