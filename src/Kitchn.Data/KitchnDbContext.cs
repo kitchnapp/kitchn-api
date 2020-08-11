@@ -31,6 +31,11 @@ namespace Kitchn.Data
 				new ReadFromSeed<Product>("Seeds/products.yaml")
 					.GetObjects()
 			);
+
+			modelBuilder.Entity<Measurement>().HasData(
+				new ReadFromSeed<Measurement>("Seeds/measurements.yaml")
+					.GetObjects()
+			);
 		}
 
 		/// <summary>
@@ -42,5 +47,10 @@ namespace Kitchn.Data
 		/// List of products
 		/// </summary>
 		public DbSet<Models.Product> Products { get; set; }
+
+		/// <summary>
+		/// List of measurements
+		/// </summary>
+		public DbSet<Models.Measurement> Measurements { get; set; }
 	}
 }

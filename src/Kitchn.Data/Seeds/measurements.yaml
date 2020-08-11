@@ -1,9 +1,9 @@
-measurements:
+items:
   - id: 3ECC9B2C-CAF5-4BAB-984D-BDD8BA0082EA
     name: Gram
 
   - id: D38C4B90-DDDF-4C0C-9369-4CC1BC474690
-    from: Kilogram
+    name: Kilogram
 
   - id: A3A2049C-1F95-4D37-ABAA-5122B3E88BE4
     name: Slice
