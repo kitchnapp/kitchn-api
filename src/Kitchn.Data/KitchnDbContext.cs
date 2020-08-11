@@ -1,3 +1,5 @@
+using Kitchn.Data.Models;
+using Kitchn.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.Data
@@ -14,5 +16,21 @@ namespace Kitchn.Data
 			: base(options)
 		{
 		}
+
+		/// <summary>
+		/// Setup of relationships and seed data when performing migrations
+		/// </summary>
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Location>().HasData(
+				new ReadFromSeed<Location>("Seeds/locations.yaml")
+					.GetObjects()
+			);
+		}
+
+		/// <summary>
+		/// List of locations
+		/// </summary>
+		public DbSet<Models.Location> Locations { get; set; }
 	}
 }
