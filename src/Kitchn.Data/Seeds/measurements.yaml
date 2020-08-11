@@ -1,0 +1,21 @@
+measurements:
+  - id: 3ECC9B2C-CAF5-4BAB-984D-BDD8BA0082EA
+    name: Gram
+
+  - id: D38C4B90-DDDF-4C0C-9369-4CC1BC474690
+    from: Kilogram
+
+  - id: A3A2049C-1F95-4D37-ABAA-5122B3E88BE4
+    name: Slice
+
+  - id: 25831FC7-BE30-4676-8A07-CCCF2D7C576B
+    name: Rasher
+
+  - id: 56C60917-F902-4657-9CC7-81EABB1315AE
+    name: Bottle
+
+  - id: 6ADB2348-5305-45B0-A275-6F8BFA1E3131
+    name: Millilitres
+
+  - id: 988C6634-BEEC-4E86-94F3-0970CC64AE35
+    name: Litres
