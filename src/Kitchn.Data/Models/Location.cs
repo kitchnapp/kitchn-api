@@ -3,17 +3,17 @@ using System;
 namespace Kitchn.Data.Models
 {
 	/// <summary>
-	/// Product Location model
+	/// Location model
 	/// </summary>
-	public class ProductLocation
+	public class Location
 	{
 		/// <summary>
-		/// ID of this product location
+		/// ID of this location
 		/// </summary>
 		public Guid Id { get; set; }
 
 		/// <summary>
-		/// Name of this product location
+		/// Name of this location
 		/// </summary>
 		public string Name { get; set; }
 	}
