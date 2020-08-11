@@ -26,11 +26,21 @@ namespace Kitchn.Data
 				new ReadFromSeed<Location>("Seeds/locations.yaml")
 					.GetObjects()
 			);
+
+			modelBuilder.Entity<Product>().HasData(
+				new ReadFromSeed<Product>("Seeds/products.yaml")
+					.GetObjects()
+			);
 		}
 
 		/// <summary>
 		/// List of locations
 		/// </summary>
 		public DbSet<Models.Location> Locations { get; set; }
+
+		/// <summary>
+		/// List of products
+		/// </summary>
+		public DbSet<Models.Product> Products { get; set; }
 	}
 }
