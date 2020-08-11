@@ -1,0 +1,12 @@
+locations:
+  - id: 34AEF97C-1B6B-4C5E-A33B-38739515DE70
+    name: Refridgerator
+
+  - id: C289DF2F-05AF-4C9F-986E-6CE4CA304E5F
+    name: Freezer
+
+  - id: C8154B38-0004-4930-BCF7-18365BD541B1
+    name: Cupboard
+
+  - id: D9963F65-EF83-4659-B8A1-FCE5A445012A
+    name: Spice Rack
