@@ -20,6 +20,16 @@ namespace Kitchn.Data.Models
 		/// <summary>
 		/// Default store location of this product
 		/// </summary>
-		public Guid DefaultProductLocationId { get; set; }
+		public Guid? DefaultLocationId { get; set; }
+
+		/// <summary>
+		/// Default consume within days of "opening" this item
+		/// </summary>
+		public TimeSpan? DefaultConsumeWithinDays { get; set; }
+
+		/// <summary>
+		/// Default best-before difference to pre-fill upon adding
+		/// </summary>
+		public TimeSpan? DefaultBestBeforeDateDifference { get; set; }
 	}
 }
