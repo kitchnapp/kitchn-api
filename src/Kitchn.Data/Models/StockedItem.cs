@@ -8,6 +8,11 @@ namespace Kitchn.Data.Models
 	public class StockedItem
 	{
 		/// <summary>
+		/// Id of the stocked item
+		/// </summary>
+		public Guid Id { get; set; }
+
+		/// <summary>
 		/// Product ID of the item stocked
 		/// </summary>
 		public Guid ProductId { get; set; }
