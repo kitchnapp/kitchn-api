@@ -62,5 +62,10 @@ namespace Kitchn.Data
 		/// List of measurements
 		/// </summary>
 		public DbSet<Models.MeasurementConversion> MeasurementConversions { get; set; }
+
+		/// <summary>
+		/// List of stocked items
+		/// </summary>
+		public DbSet<Models.StockedItem> StockedItems { get; set; }
 	}
 }
