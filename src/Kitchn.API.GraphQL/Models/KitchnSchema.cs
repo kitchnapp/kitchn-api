@@ -10,6 +10,7 @@ namespace Kitchn.API.GraphQL.Models
 		public KitchnSchema(IServiceProvider provider) : base(provider)
 		{
 			Query = provider.GetRequiredService<KitchnQuery>();
+			Mutation = provider.GetRequiredService<KitchnMutation>();
 		}
 	}
 }

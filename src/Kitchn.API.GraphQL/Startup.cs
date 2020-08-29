@@ -27,9 +27,11 @@ namespace Kitchn.API.GraphQL
 				options.UseSqlite("Data Source=test.db")
 			);
 
+			services.AddScoped<LocationInputType>();
 			services.AddScoped<LocationType>();
 			services.AddScoped<ProductType>();
 			services.AddScoped<KitchnQuery>();
+			services.AddScoped<KitchnMutation>();
 			services.AddScoped<KitchnSchema>();
 
 			services
