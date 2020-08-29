@@ -11,7 +11,7 @@ namespace Kitchn.Data
 			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
 			optionsBuilder.UseSqlite("Data Source=test.db");
 
-			return new KitchnDbContext(optionsBuilder.Options);
+			return new KitchnDbContext(optionsBuilder.Options, seed: true);
 		}
 	}
 }

@@ -10,11 +10,17 @@ namespace Kitchn.Data
 	public class KitchnDbContext : DbContext
 	{
 		/// <summary>
+		/// Add option to seed data on model create
+		/// </summary>
+		public bool Seed { get; set; }
+
+		/// <summary>
 		/// Initialise a db context via options
 		/// </summary>
-		public KitchnDbContext(DbContextOptions<KitchnDbContext> options)
+		public KitchnDbContext(DbContextOptions<KitchnDbContext> options, bool seed = false)
 			: base(options)
 		{
+			Seed = seed;
 		}
 
 		/// <summary>
@@ -22,30 +28,33 @@ namespace Kitchn.Data
 		/// </summary>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Location>().HasData(
-				new ReadFromSeed<Location>("Seeds/locations.yaml")
-					.GetObjects()
-			);
+			if (Seed)
+			{
+				modelBuilder.Entity<Location>().HasData(
+					new ReadFromSeed<Location>("Seeds/locations.yaml")
+						.GetObjects()
+				);
 
-			modelBuilder.Entity<Product>().HasData(
-				new ReadFromSeed<Product>("Seeds/products.yaml")
-					.GetObjects()
-			);
+				modelBuilder.Entity<Product>().HasData(
+					new ReadFromSeed<Product>("Seeds/products.yaml")
+						.GetObjects()
+				);
 
-			modelBuilder.Entity<Measurement>().HasData(
-				new ReadFromSeed<Measurement>("Seeds/measurements.yaml")
-					.GetObjects()
-			);
+				modelBuilder.Entity<Measurement>().HasData(
+					new ReadFromSeed<Measurement>("Seeds/measurements.yaml")
+						.GetObjects()
+				);
 
-			modelBuilder.Entity<MeasurementConversion>().HasData(
-				new ReadFromSeed<MeasurementConversion>("Seeds/measurementConversions.yaml")
-					.GetObjects()
-			);
+				modelBuilder.Entity<MeasurementConversion>().HasData(
+					new ReadFromSeed<MeasurementConversion>("Seeds/measurementConversions.yaml")
+						.GetObjects()
+				);
 
-			modelBuilder.Entity<Chore>().HasData(
-				new ReadFromSeed<Chore>("Seeds/chores.yaml")
-					.GetObjects()
-			);
+				modelBuilder.Entity<Chore>().HasData(
+					new ReadFromSeed<Chore>("Seeds/chores.yaml")
+						.GetObjects()
+				);
+			}
 		}
 
 		/// <summary>
