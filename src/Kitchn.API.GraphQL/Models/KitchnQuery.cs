@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GraphQL;
 using GraphQL.Types;
+using Kitchn.Data;
 
 namespace Kitchn.API.GraphQL.Models
 {
 	public class KitchnQuery : ObjectGraphType
 	{
-		public KitchnQuery()
+		public KitchnQuery(KitchnDbContext dbContext)
 		{
 			Field<ProductType>(
 				"product",
@@ -55,12 +57,13 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var search = context.GetArgument<string>("search");
 
-					return new List<Location>{
-						new Location {
-							Id = Guid.NewGuid(),
-							Name = "Example"
-						}
-					};
+					return dbContext.Locations
+							.Where(q => q.Name.Contains(search) || search == null)
+							.Select(location => new Location
+							{
+								Id = location.Id,
+								Name = location.Name
+							});
 				}
 			);
 		}

@@ -7,14 +7,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using GraphQL;
 using Kitchn.API.GraphQL.Models;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
-using GraphQL.Types;
-using GraphQL.SystemTextJson;
 using Microsoft.Extensions.Logging;
 using GraphQL.Server.Ui.Playground;
+using Kitchn.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL
 {
@@ -24,10 +23,14 @@ namespace Kitchn.API.GraphQL
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddSingleton<LocationType>();
-			services.AddSingleton<ProductType>();
-			services.AddSingleton<KitchnQuery>();
-			services.AddSingleton<KitchnSchema>();
+			services.AddDbContext<KitchnDbContext>(options =>
+				options.UseSqlite("Data Source=test.db")
+			);
+
+			services.AddScoped<LocationType>();
+			services.AddScoped<ProductType>();
+			services.AddScoped<KitchnQuery>();
+			services.AddScoped<KitchnSchema>();
 
 			services
 				.AddGraphQL((options, provider) =>
@@ -36,6 +39,7 @@ namespace Kitchn.API.GraphQL
 					var logger = provider.GetRequiredService<ILogger<Startup>>();
 					options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
 				})
+				.AddGraphTypes(ServiceLifetime.Scoped)
 				.AddSystemTextJson(deserializerSettings => { }, serializerSettings => { }) // For .NET Core 3+
 				.AddDataLoader() // Add required services for DataLoader support
 				.AddGraphTypes(typeof(KitchnSchema));
