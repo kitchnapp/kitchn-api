@@ -39,11 +39,14 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return new Product
-					{
-						Id = id,
-						Name = "Test Location"
-					};
+					return dbContext.Locations
+						.Where(q => q.Id == id)
+						.Select(location => new Location
+						{
+							Id = location.Id,
+							Name = location.Name
+						})
+						.FirstOrDefault();
 				}
 			);
 
