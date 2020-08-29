@@ -12,7 +12,7 @@ namespace Kitchn.API.GraphQL.Models
 				"product",
 				"Get product by ID",
 				arguments: new QueryArguments(
-					new QueryArgument<IdGraphType> { Name = "id" }
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
 				),
 				resolve: context =>
 				{
