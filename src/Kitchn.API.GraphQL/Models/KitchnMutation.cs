@@ -62,6 +62,35 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<LocationType>(
+				"deleteLocation",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbLocation = dbContext.Locations
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbLocation == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbLocation);
+					dbContext.SaveChanges();
+
+					return new Location
+					{
+						Id = dbLocation.Id,
+						Name = dbLocation.Name
+					};
+				}
+			);
 		}
 	}
 }
