@@ -8,7 +8,7 @@ namespace Kitchn.API.GraphQL.Models
 		public ProductType()
 		{
 			Name = "Product";
-			Description = "A mechanical creature in the Star Wars universe.";
+			Description = "A product in the Kitchn system.";
 
 			Field(x => x.Id).Description("The ID of the product.");
 			Field(x => x.Name).Description("The name of the product.");
