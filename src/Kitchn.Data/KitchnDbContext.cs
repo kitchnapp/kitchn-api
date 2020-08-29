@@ -41,6 +41,11 @@ namespace Kitchn.Data
 				new ReadFromSeed<MeasurementConversion>("Seeds/measurementConversions.yaml")
 					.GetObjects()
 			);
+
+			modelBuilder.Entity<Chore>().HasData(
+				new ReadFromSeed<Chore>("Seeds/chores.yaml")
+					.GetObjects()
+			);
 		}
 
 		/// <summary>
@@ -67,5 +72,10 @@ namespace Kitchn.Data
 		/// List of stocked items
 		/// </summary>
 		public DbSet<Models.StockedItem> StockedItems { get; set; }
+
+		/// <summary>
+		/// List of chores
+		/// </summary>
+		public DbSet<Models.StockedItem> Chores { get; set; }
 	}
 }
