@@ -54,6 +54,11 @@ namespace Kitchn.Data
 					new ReadFromSeed<Chore>("Seeds/chores.yaml")
 						.GetObjects()
 				);
+
+				modelBuilder.Entity<RecipeCategory>().HasData(
+					new ReadFromSeed<RecipeCategory>("Seeds/recipeCategories.yaml")
+						.GetObjects()
+				);
 			}
 		}
 
@@ -86,5 +91,10 @@ namespace Kitchn.Data
 		/// List of chores
 		/// </summary>
 		public DbSet<Models.StockedItem> Chores { get; set; }
+
+		/// <summary>
+		/// List of chores
+		/// </summary>
+		public DbSet<Models.RecipeCategory> RecipeCategories { get; set; }
 	}
 }

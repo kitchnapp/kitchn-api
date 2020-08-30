@@ -3,14 +3,16 @@ using System;
 using Kitchn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kitchn.Data.Migrations
 {
     [DbContext(typeof(KitchnDbContext))]
-    partial class KitchnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200830092149_RecipeCategories")]
+    partial class RecipeCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
