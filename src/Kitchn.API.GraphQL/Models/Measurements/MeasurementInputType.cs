@@ -1,7 +1,7 @@
 using GraphQL;
 using GraphQL.Types;
 
-namespace Kitchn.API.GraphQL.Models
+namespace Kitchn.API.GraphQL.Models.Measurements
 {
 	public class MeasurementInputType : InputObjectGraphType<Measurement>
 	{

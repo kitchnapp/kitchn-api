@@ -29,7 +29,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<LocationType>(
+			Field<Locations.LocationType>(
 				"location",
 				"Get location by ID",
 				arguments: new QueryArguments(
@@ -41,7 +41,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Locations
 						.Where(q => q.Id == id)
-						.Select(location => new Location
+						.Select(location => new Locations.Location
 						{
 							Id = location.Id,
 							Name = location.Name
@@ -50,7 +50,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<LocationType>>(
+			Field<ListGraphType<Locations.LocationType>>(
 				"locations",
 				"Get a list of locations",
 				arguments: new QueryArguments(
@@ -62,7 +62,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Locations
 							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(location => new Location
+							.Select(location => new Locations.Location
 							{
 								Id = location.Id,
 								Name = location.Name
@@ -70,7 +70,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<MeasurementType>>(
+			Field<ListGraphType<Measurements.MeasurementType>>(
 				"measurements",
 				"Get a list of measurements",
 				arguments: new QueryArguments(
@@ -82,7 +82,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Measurements
 							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(measurement => new Measurement
+							.Select(measurement => new Measurements.Measurement
 							{
 								Id = measurement.Id,
 								Name = measurement.Name,
@@ -91,7 +91,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<MeasurementType>(
+			Field<Measurements.MeasurementType>(
 				"measurement",
 				"Get measurement by ID",
 				arguments: new QueryArguments(
@@ -103,7 +103,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Measurements
 						.Where(q => q.Id == id)
-						.Select(measurement => new Measurement
+						.Select(measurement => new Measurements.Measurement
 						{
 							Id = measurement.Id,
 							Name = measurement.Name,
@@ -113,7 +113,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<ChoreType>>(
+			Field<ListGraphType<Chores.ChoreType>>(
 				"chores",
 				"Get a list of chores",
 				arguments: new QueryArguments(
@@ -125,7 +125,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Chores
 							.Where(q => q.Title.Contains(search) || search == null)
-							.Select(chore => new Chore
+							.Select(chore => new Chores.Chore
 							{
 								Id = chore.Id,
 								Title = chore.Title,
@@ -134,7 +134,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ChoreType>(
+			Field<Chores.ChoreType>(
 				"chore",
 				"Get chore by ID",
 				arguments: new QueryArguments(
@@ -146,7 +146,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					return dbContext.Chores
 						.Where(q => q.Id == id)
-						.Select(chore => new Chore
+						.Select(chore => new Chores.Chore
 						{
 							Id = chore.Id,
 							Title = chore.Title,

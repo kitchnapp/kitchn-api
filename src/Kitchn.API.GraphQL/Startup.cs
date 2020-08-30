@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Kitchn.API.GraphQL.Models;
@@ -27,12 +22,12 @@ namespace Kitchn.API.GraphQL
 				options.UseSqlite("Data Source=test.db")
 			);
 
-			services.AddScoped<ChoreInputType>();
-			services.AddScoped<ChoreType>();
-			services.AddScoped<LocationInputType>();
-			services.AddScoped<LocationType>();
-			services.AddScoped<MeasurementInputType>();
-			services.AddScoped<MeasurementType>();
+			services.AddScoped<Models.Chores.ChoreInputType>();
+			services.AddScoped<Models.Chores.ChoreType>();
+			services.AddScoped<Models.Locations.LocationInputType>();
+			services.AddScoped<Models.Locations.LocationType>();
+			services.AddScoped<Models.Measurements.MeasurementInputType>();
+			services.AddScoped<Models.Measurements.MeasurementType>();
 			services.AddScoped<ProductType>();
 			services.AddScoped<KitchnQuery>();
 			services.AddScoped<KitchnMutation>();

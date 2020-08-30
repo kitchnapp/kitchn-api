@@ -1,7 +1,7 @@
 using GraphQL;
 using GraphQL.Types;
 
-namespace Kitchn.API.GraphQL.Models
+namespace Kitchn.API.GraphQL.Models.Locations
 {
 	public class LocationInputType : InputObjectGraphType<Location>
 	{

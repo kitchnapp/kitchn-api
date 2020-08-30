@@ -1,6 +1,6 @@
 using System;
 
-namespace Kitchn.API.GraphQL.Models
+namespace Kitchn.API.GraphQL.Models.Chores
 {
 	public class Chore
 	{

@@ -10,14 +10,14 @@ namespace Kitchn.API.GraphQL.Models
 	{
 		public KitchnMutation(KitchnDbContext dbContext)
 		{
-			Field<LocationType>(
+			Field<Locations.LocationType>(
 				"createLocation",
 				arguments: new QueryArguments(
-					new QueryArgument<NonNullGraphType<LocationInputType>> { Name = "location" }
+					new QueryArgument<NonNullGraphType<Locations.LocationInputType>> { Name = "location" }
 				),
 				resolve: context =>
 				{
-					var location = context.GetArgument<Location>("location");
+					var location = context.GetArgument<Locations.Location>("location");
 
 					dbContext.Locations.Add(new Kitchn.Data.Models.Location
 					{
@@ -30,16 +30,16 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<LocationType>(
+			Field<Locations.LocationType>(
 				"updateLocation",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
-					new QueryArgument<NonNullGraphType<LocationInputType>> { Name = "location" }
+					new QueryArgument<NonNullGraphType<Locations.LocationInputType>> { Name = "location" }
 				),
 				resolve: context =>
 				{
 					var id = context.GetArgument<Guid>("id");
-					var location = context.GetArgument<Location>("location");
+					var location = context.GetArgument<Locations.Location>("location");
 
 					var dbLocation = dbContext.Locations
 						.Where(q => q.Id == id)
@@ -55,7 +55,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Locations.Update(dbLocation);
 					dbContext.SaveChanges();
 
-					return new Location
+					return new Locations.Location
 					{
 						Id = dbLocation.Id,
 						Name = dbLocation.Name
@@ -63,7 +63,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<LocationType>(
+			Field<Locations.LocationType>(
 				"deleteLocation",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
@@ -84,7 +84,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbLocation);
 					dbContext.SaveChanges();
 
-					return new Location
+					return new Locations.Location
 					{
 						Id = dbLocation.Id,
 						Name = dbLocation.Name
@@ -92,14 +92,14 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<MeasurementType>(
+			Field<Measurements.MeasurementType>(
 				"createMeasurement",
 				arguments: new QueryArguments(
-					new QueryArgument<NonNullGraphType<MeasurementInputType>> { Name = "measurement" }
+					new QueryArgument<NonNullGraphType<Measurements.MeasurementInputType>> { Name = "measurement" }
 				),
 				resolve: context =>
 				{
-					var measurement = context.GetArgument<Measurement>("measurement");
+					var measurement = context.GetArgument<Measurements.Measurement>("measurement");
 
 					dbContext.Measurements.Add(new Kitchn.Data.Models.Measurement
 					{
@@ -113,16 +113,16 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<MeasurementType>(
+			Field<Measurements.MeasurementType>(
 				"updateMeasurement",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
-					new QueryArgument<NonNullGraphType<MeasurementInputType>> { Name = "measurement" }
+					new QueryArgument<NonNullGraphType<Measurements.MeasurementInputType>> { Name = "measurement" }
 				),
 				resolve: context =>
 				{
 					var id = context.GetArgument<Guid>("id");
-					var measurement = context.GetArgument<Measurement>("measurement");
+					var measurement = context.GetArgument<Measurements.Measurement>("measurement");
 
 					var dbMeasurement = dbContext.Measurements
 						.Where(q => q.Id == id)
@@ -139,7 +139,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Measurements.Update(dbMeasurement);
 					dbContext.SaveChanges();
 
-					return new Measurement
+					return new Measurements.Measurement
 					{
 						Id = dbMeasurement.Id,
 						Name = dbMeasurement.Name,
@@ -148,7 +148,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<MeasurementType>(
+			Field<Measurements.MeasurementType>(
 				"deleteMeasurement",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
@@ -169,7 +169,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbMeasurement);
 					dbContext.SaveChanges();
 
-					return new Measurement
+					return new Measurements.Measurement
 					{
 						Id = dbMeasurement.Id,
 						Name = dbMeasurement.Name,
@@ -178,14 +178,14 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ChoreType>(
+			Field<Chores.ChoreType>(
 				"createChore",
 				arguments: new QueryArguments(
-					new QueryArgument<NonNullGraphType<ChoreInputType>> { Name = "chore" }
+					new QueryArgument<NonNullGraphType<Chores.ChoreInputType>> { Name = "chore" }
 				),
 				resolve: context =>
 				{
-					var chore = context.GetArgument<Chore>("chore");
+					var chore = context.GetArgument<Chores.Chore>("chore");
 
 					dbContext.Chores.Add(new Kitchn.Data.Models.Chore
 					{
@@ -199,16 +199,16 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ChoreType>(
+			Field<Chores.ChoreType>(
 				"updateChore",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
-					new QueryArgument<NonNullGraphType<ChoreInputType>> { Name = "chore" }
+					new QueryArgument<NonNullGraphType<Chores.ChoreInputType>> { Name = "chore" }
 				),
 				resolve: context =>
 				{
 					var id = context.GetArgument<Guid>("id");
-					var chore = context.GetArgument<Chore>("chore");
+					var chore = context.GetArgument<Chores.Chore>("chore");
 
 					var dbChore = dbContext.Chores
 						.Where(q => q.Id == id)
@@ -225,7 +225,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Chores.Update(dbChore);
 					dbContext.SaveChanges();
 
-					return new Chore
+					return new Chores.Chore
 					{
 						Id = dbChore.Id,
 						Title = dbChore.Title,
@@ -234,7 +234,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ChoreType>(
+			Field<Chores.ChoreType>(
 				"deleteChore",
 				arguments: new QueryArguments(
 					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
@@ -255,7 +255,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbChore);
 					dbContext.SaveChanges();
 
-					return new Chore
+					return new Chores.Chore
 					{
 						Id = dbChore.Id,
 						Title = dbChore.Title,
