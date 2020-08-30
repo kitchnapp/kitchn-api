@@ -17,8 +17,13 @@ namespace Kitchn.Data
 		/// <summary>
 		/// Initialise a db context via options
 		/// </summary>
-		public KitchnDbContext(DbContextOptions<KitchnDbContext> options, bool seed = false)
+		public KitchnDbContext(DbContextOptions<KitchnDbContext> options)
 			: base(options)
+		{
+		}
+
+		public KitchnDbContext(DbContextOptions<KitchnDbContext> options, bool seed = false)
+			: this(options)
 		{
 			Seed = seed;
 		}
