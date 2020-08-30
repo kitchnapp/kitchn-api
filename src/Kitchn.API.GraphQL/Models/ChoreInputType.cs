@@ -9,8 +9,8 @@ namespace Kitchn.API.GraphQL.Models
 		{
 			Name = "ChoreInput";
 
-			Field(x => x.Title).Description("The title of the chore.");
-			Field(x => x.Description).Description("The description of the chore.");
+			Field(x => x.Title, nullable: true).Description("The title of the chore.");
+			Field(x => x.Description, nullable: true).Description("The description of the chore.");
 		}
 	}
 }

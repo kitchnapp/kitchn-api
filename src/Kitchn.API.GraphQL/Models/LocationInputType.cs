@@ -9,7 +9,7 @@ namespace Kitchn.API.GraphQL.Models
 		{
 			Name = "LocationInput";
 
-			Field(x => x.Name).Description("The name of the location.");
+			Field(x => x.Name, nullable: true).Description("The name of the location.");
 		}
 	}
 }
