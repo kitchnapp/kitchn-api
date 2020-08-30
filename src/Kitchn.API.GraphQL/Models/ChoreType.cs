@@ -12,7 +12,7 @@ namespace Kitchn.API.GraphQL.Models
 
 			Field(x => x.Id).Description("The ID of the chore.");
 			Field(x => x.Title).Description("The title of the chore.");
-			Field(x => x.Description).Description("The description of the chore.");
+			Field(x => x.Description, nullable: true).Description("The description of the chore.");
 		}
 	}
 }

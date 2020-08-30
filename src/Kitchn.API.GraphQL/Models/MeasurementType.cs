@@ -12,7 +12,7 @@ namespace Kitchn.API.GraphQL.Models
 
 			Field(x => x.Id).Description("The ID of the measurement.");
 			Field(x => x.Name).Description("The name of the measurement.");
-			Field(x => x.MultipleName).Description("The multiple word of the measurement.");
+			Field(x => x.MultipleName, nullable: true).Description("The multiple word of the measurement.");
 		}
 	}
 }
