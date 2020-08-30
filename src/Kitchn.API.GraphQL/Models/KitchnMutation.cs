@@ -134,7 +134,7 @@ namespace Kitchn.API.GraphQL.Models
 					}
 
 					dbMeasurement.Name = measurement.Name ?? dbMeasurement.Name;
-					dbMeasurement.Name = measurement.MultipleName ?? dbMeasurement.MultipleName;
+					dbMeasurement.MultipleName = measurement.MultipleName ?? dbMeasurement.MultipleName;
 
 					dbContext.Measurements.Update(dbMeasurement);
 					dbContext.SaveChanges();
@@ -173,6 +173,92 @@ namespace Kitchn.API.GraphQL.Models
 					{
 						Id = dbMeasurement.Id,
 						Name = dbMeasurement.Name
+					};
+				}
+			);
+
+			Field<ChoreType>(
+				"createChore",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<ChoreInputType>> { Name = "chore" }
+				),
+				resolve: context =>
+				{
+					var chore = context.GetArgument<Chore>("chore");
+
+					dbContext.Chores.Add(new Kitchn.Data.Models.Chore
+					{
+						Id = Guid.NewGuid(),
+						Title = chore.Title,
+						Description = chore.Description
+					});
+					dbContext.SaveChanges();
+
+					return chore;
+				}
+			);
+
+			Field<ChoreType>(
+				"updateChore",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<ChoreInputType>> { Name = "chore" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var chore = context.GetArgument<Chore>("chore");
+
+					var dbChore = dbContext.Chores
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbChore == null)
+					{
+						return null;
+					}
+
+					dbChore.Title = chore.Title ?? dbChore.Title;
+					dbChore.Description = chore.Description ?? dbChore.Description;
+
+					dbContext.Chores.Update(dbChore);
+					dbContext.SaveChanges();
+
+					return new Chore
+					{
+						Id = dbChore.Id,
+						Title = dbChore.Title,
+						Description = dbChore.Description
+					};
+				}
+			);
+
+			Field<ChoreType>(
+				"deleteChore",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbChore = dbContext.Chores
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbChore == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbChore);
+					dbContext.SaveChanges();
+
+					return new Chore
+					{
+						Id = dbChore.Id,
+						Title = dbChore.Title,
+						Description = dbChore.Description,
 					};
 				}
 			);

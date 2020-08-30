@@ -112,6 +112,49 @@ namespace Kitchn.API.GraphQL.Models
 						.FirstOrDefault();
 				}
 			);
+
+			Field<ListGraphType<ChoreType>>(
+				"chores",
+				"Get a list of chores",
+				arguments: new QueryArguments(
+					new QueryArgument<StringGraphType> { Name = "search" }
+				),
+				resolve: context =>
+				{
+					var search = context.GetArgument<string>("search");
+
+					return dbContext.Chores
+							.Where(q => q.Title.Contains(search) || search == null)
+							.Select(chore => new Chore
+							{
+								Id = chore.Id,
+								Title = chore.Title,
+								Description = chore.Description
+							});
+				}
+			);
+
+			Field<ChoreType>(
+				"chore",
+				"Get chore by ID",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					return dbContext.Chores
+						.Where(q => q.Id == id)
+						.Select(chore => new Chore
+						{
+							Id = chore.Id,
+							Title = chore.Title,
+							Description = chore.Description
+						})
+						.FirstOrDefault();
+				}
+			);
 		}
 	}
 }

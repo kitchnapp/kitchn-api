@@ -90,7 +90,7 @@ namespace Kitchn.Data
 		/// <summary>
 		/// List of chores
 		/// </summary>
-		public DbSet<Models.StockedItem> Chores { get; set; }
+		public DbSet<Models.Chore> Chores { get; set; }
 
 		/// <summary>
 		/// List of chores
