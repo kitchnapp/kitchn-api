@@ -32,7 +32,7 @@ namespace Kitchn.Data.Migrations
 
 					b.HasKey("Id");
 
-					b.ToTable("Chore");
+					b.ToTable("Chores");
 
 					b.HasData(
 						new

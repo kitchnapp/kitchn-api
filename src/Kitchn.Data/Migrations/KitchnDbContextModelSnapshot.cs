@@ -30,7 +30,7 @@ namespace Kitchn.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chore");
+                    b.ToTable("Chores");
 
                     b.HasData(
                         new
@@ -265,7 +265,7 @@ namespace Kitchn.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StockedItem");
+                    b.ToTable("StockedItems");
                 });
 #pragma warning restore 612, 618
         }

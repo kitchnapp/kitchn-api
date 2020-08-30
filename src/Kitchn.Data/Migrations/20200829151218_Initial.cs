@@ -8,7 +8,7 @@ namespace Kitchn.Data.Migrations
 		protected override void Up(MigrationBuilder migrationBuilder)
 		{
 			migrationBuilder.CreateTable(
-				name: "Chore",
+				name: "Chores",
 				columns: table => new
 				{
 					Id = table.Column<Guid>(nullable: false),
@@ -17,7 +17,7 @@ namespace Kitchn.Data.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_Chore", x => x.Id);
+					table.PrimaryKey("PK_Chores", x => x.Id);
 				});
 
 			migrationBuilder.CreateTable(
@@ -90,17 +90,17 @@ namespace Kitchn.Data.Migrations
 				});
 
 			migrationBuilder.InsertData(
-				table: "Chore",
+				table: "Chores",
 				columns: new[] { "Id", "Description", "Title" },
 				values: new object[] { new Guid("5b7ee657-1ffb-4d78-b6ef-a9f2c1506f8b"), null, "Make Bed" });
 
 			migrationBuilder.InsertData(
-				table: "Chore",
+				table: "Chores",
 				columns: new[] { "Id", "Description", "Title" },
 				values: new object[] { new Guid("d99e4d54-934e-47ea-b5ec-135eb59f83ae"), null, "Clean Oven" });
 
 			migrationBuilder.InsertData(
-				table: "Chore",
+				table: "Chores",
 				columns: new[] { "Id", "Description", "Title" },
 				values: new object[] { new Guid("38da484f-6d6d-4a2e-afc3-5f55f1a282a0"), null, "Empty Bins" });
 
@@ -183,7 +183,7 @@ namespace Kitchn.Data.Migrations
 		protected override void Down(MigrationBuilder migrationBuilder)
 		{
 			migrationBuilder.DropTable(
-				name: "Chore");
+				name: "Chores");
 
 			migrationBuilder.DropTable(
 				name: "Locations");
