@@ -91,6 +91,91 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<MeasurementType>(
+				"createMeasurement",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<MeasurementInputType>> { Name = "measurement" }
+				),
+				resolve: context =>
+				{
+					var measurement = context.GetArgument<Measurement>("measurement");
+
+					dbContext.Measurements.Add(new Kitchn.Data.Models.Measurement
+					{
+						Id = Guid.NewGuid(),
+						Name = measurement.Name,
+						MultipleName = measurement.MultipleName
+					});
+					dbContext.SaveChanges();
+
+					return measurement;
+				}
+			);
+
+			Field<MeasurementType>(
+				"updateMeasurement",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<MeasurementInputType>> { Name = "measurement" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var measurement = context.GetArgument<Measurement>("measurement");
+
+					var dbMeasurement = dbContext.Measurements
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbMeasurement == null)
+					{
+						return null;
+					}
+
+					dbMeasurement.Name = measurement.Name ?? dbMeasurement.Name;
+					dbMeasurement.Name = measurement.MultipleName ?? dbMeasurement.MultipleName;
+
+					dbContext.Measurements.Update(dbMeasurement);
+					dbContext.SaveChanges();
+
+					return new Measurement
+					{
+						Id = dbMeasurement.Id,
+						Name = dbMeasurement.Name,
+						MultipleName = dbMeasurement.MultipleName
+					};
+				}
+			);
+
+			Field<MeasurementType>(
+				"deleteMeasurement",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbMeasurement = dbContext.Measurements
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbMeasurement == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbMeasurement);
+					dbContext.SaveChanges();
+
+					return new Measurement
+					{
+						Id = dbMeasurement.Id,
+						Name = dbMeasurement.Name
+					};
+				}
+			);
 		}
 	}
 }

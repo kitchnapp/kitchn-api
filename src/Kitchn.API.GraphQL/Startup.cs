@@ -29,6 +29,8 @@ namespace Kitchn.API.GraphQL
 
 			services.AddScoped<LocationInputType>();
 			services.AddScoped<LocationType>();
+			services.AddScoped<MeasurementInputType>();
+			services.AddScoped<MeasurementType>();
 			services.AddScoped<ProductType>();
 			services.AddScoped<KitchnQuery>();
 			services.AddScoped<KitchnMutation>();

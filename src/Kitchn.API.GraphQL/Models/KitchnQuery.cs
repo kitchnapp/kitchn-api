@@ -69,6 +69,49 @@ namespace Kitchn.API.GraphQL.Models
 							});
 				}
 			);
+
+			Field<ListGraphType<MeasurementType>>(
+				"measurements",
+				"Get a list of measurements",
+				arguments: new QueryArguments(
+					new QueryArgument<StringGraphType> { Name = "search" }
+				),
+				resolve: context =>
+				{
+					var search = context.GetArgument<string>("search");
+
+					return dbContext.Measurements
+							.Where(q => q.Name.Contains(search) || search == null)
+							.Select(measurement => new Measurement
+							{
+								Id = measurement.Id,
+								Name = measurement.Name,
+								MultipleName = measurement.MultipleName
+							});
+				}
+			);
+
+			Field<MeasurementType>(
+				"measurement",
+				"Get measurement by ID",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					return dbContext.Measurements
+						.Where(q => q.Id == id)
+						.Select(measurement => new Measurement
+						{
+							Id = measurement.Id,
+							Name = measurement.Name,
+							MultipleName = measurement.MultipleName
+						})
+						.FirstOrDefault();
+				}
+			);
 		}
 	}
 }
