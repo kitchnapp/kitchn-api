@@ -172,7 +172,8 @@ namespace Kitchn.API.GraphQL.Models
 					return new Measurement
 					{
 						Id = dbMeasurement.Id,
-						Name = dbMeasurement.Name
+						Name = dbMeasurement.Name,
+						MultipleName = dbMeasurement.MultipleName
 					};
 				}
 			);
