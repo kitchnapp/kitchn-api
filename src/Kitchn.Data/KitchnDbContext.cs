@@ -83,7 +83,7 @@ namespace Kitchn.Data
 		public DbSet<Models.Measurement> Measurements { get; set; }
 
 		/// <summary>
-		/// List of measurements
+		/// List of measurement conversions
 		/// </summary>
 		public DbSet<Models.MeasurementConversion> MeasurementConversions { get; set; }
 
@@ -98,8 +98,13 @@ namespace Kitchn.Data
 		public DbSet<Models.Chore> Chores { get; set; }
 
 		/// <summary>
-		/// List of chores
+		/// List of recipe categories
 		/// </summary>
 		public DbSet<Models.RecipeCategory> RecipeCategories { get; set; }
+
+		/// <summary>
+		/// List of recipes
+		/// </summary>
+		public DbSet<Models.Recipe> Recipes { get; set; }
 	}
 }
