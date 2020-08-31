@@ -200,6 +200,47 @@ namespace Kitchn.API.GraphQL.Models
 						.FirstOrDefault();
 				}
 			);
+
+			Field<RecipeCategories.RecipeCategoryType>(
+				"recipeCategory",
+				"Get recipe category by ID",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					return dbContext.Recipes
+						.Where(q => q.Id == id)
+						.Select(recipe => new RecipeCategories.RecipeCategory
+						{
+							Id = recipe.Id,
+							Name = recipe.Name
+						})
+						.FirstOrDefault();
+				}
+			);
+
+			Field<ListGraphType<RecipeCategories.RecipeCategoryType>>(
+				"recipeCategories",
+				"Get a list of recipe categories",
+				arguments: new QueryArguments(
+					new QueryArgument<StringGraphType> { Name = "search" }
+				),
+				resolve: context =>
+				{
+					var search = context.GetArgument<string>("search");
+
+					return dbContext.RecipeCategories
+							.Where(q => q.Name.Contains(search) || search == null)
+							.Select(recipe => new RecipeCategories.RecipeCategory
+							{
+								Id = recipe.Id,
+								Name = recipe.Name
+							});
+				}
+			);
 		}
 	}
 }
