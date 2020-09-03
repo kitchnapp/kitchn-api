@@ -11,7 +11,7 @@ namespace Kitchn.Data
 			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
 			optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=password");
 
-			return new KitchnDbContext(optionsBuilder.Options, seed: true);
+			return new KitchnDbContext(optionsBuilder.Options, new KitchnDbContextOptions { Seed = true });
 		}
 	}
 }

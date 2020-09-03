@@ -12,7 +12,7 @@ namespace Kitchn.Data
 		/// <summary>
 		/// Add option to seed data on model create
 		/// </summary>
-		public bool Seed { get; set; }
+		public KitchnDbContextOptions KitchnDbContextOptions { get; set; }
 
 		/// <summary>
 		/// Initialise a db context via options
@@ -22,10 +22,10 @@ namespace Kitchn.Data
 		{
 		}
 
-		public KitchnDbContext(DbContextOptions<KitchnDbContext> options, bool seed = false)
+		public KitchnDbContext(DbContextOptions<KitchnDbContext> options, KitchnDbContextOptions kitchnOptions = null)
 			: this(options)
 		{
-			Seed = seed;
+			KitchnDbContextOptions = kitchnOptions;
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Kitchn.Data
 				.WithMany(t => t.Recipes)
 				.HasForeignKey(pt => pt.RecipeCategoryId);
 
-			if (Seed)
+			if (KitchnDbContextOptions?.Seed ?? false)
 			{
 				modelBuilder.Entity<Location>().HasData(
 					new ReadFromSeed<Location>("Seeds/locations.yaml")
