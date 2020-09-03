@@ -13,6 +13,16 @@ namespace Kitchn.Data.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
+		/// Parent recipe ID
+		/// </summary>
+		public Guid RecipeId { get; set; }
+
+		/// <summary>
+		/// Navigation property for the recipe
+		/// </summary>
+		public Recipe Recipe { get; set; }
+
+		/// <summary>
 		/// Order placement of this recipe instruction. 1 is first, 999 is last.
 		/// </summary>
 		public int Order { get; set; }
