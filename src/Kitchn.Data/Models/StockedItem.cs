@@ -18,9 +18,19 @@ namespace Kitchn.Data.Models
 		public Guid ProductId { get; set; }
 
 		/// <summary>
+		/// Navigation property for the product of this stock
+		/// </summary>
+		public Product Product { get; set; }
+
+		/// <summary>
 		/// Current location of this stocked item
 		/// </summary>
 		public Guid LocationId { get; set; }
+
+		/// <summary>
+		/// Navigation property for the location of this stock
+		/// </summary>
+		public Location Location { get; set; }
 
 		/// <summary>
 		/// Latest expiry date for this stocked item
