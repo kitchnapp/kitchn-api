@@ -23,6 +23,11 @@ namespace Kitchn.Data.Models
 		public Guid? DefaultLocationId { get; set; }
 
 		/// <summary>
+		/// Navigation property for default location
+		/// </summary>
+		public Location DefaultLocation { get; set; }
+
+		/// <summary>
 		/// Default consume within days of "opening" this item
 		/// </summary>
 		public TimeSpan? DefaultConsumeWithinDays { get; set; }
