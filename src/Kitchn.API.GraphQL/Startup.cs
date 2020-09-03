@@ -19,7 +19,7 @@ namespace Kitchn.API.GraphQL
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<KitchnDbContext>(options =>
-				options.UseSqlite("Data Source=test.db")
+				options.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=password")
 			);
 
 			services.AddScoped<Models.RecipeCategories.RecipeCategoryType>();

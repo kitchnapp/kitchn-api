@@ -9,7 +9,7 @@ namespace Kitchn.Data
 		public KitchnDbContext CreateDbContext(string[] args)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
-			optionsBuilder.UseSqlite("Data Source=test.db");
+			optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=password");
 
 			return new KitchnDbContext(optionsBuilder.Options, seed: true);
 		}
