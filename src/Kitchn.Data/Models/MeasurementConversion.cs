@@ -18,9 +18,19 @@ namespace Kitchn.Data.Models
 		public Guid FromMeasurementId { get; set; }
 
 		/// <summary>
+		/// Navigation property for From Measurement
+		/// </summary>
+		public Measurement FromMeasurement { get; set; }
+
+		/// <summary>
 		/// To Measurement ID
 		/// </summary>
 		public Guid ToMeasurementId { get; set; }
+
+		/// <summary>
+		/// Navigation property for To Measurement
+		/// </summary>
+		public Measurement ToMeasurement { get; set; }
 
 		/// <summary>
 		/// Factor between the measurements to go from one measurement to the other
