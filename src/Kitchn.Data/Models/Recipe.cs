@@ -29,9 +29,9 @@ namespace Kitchn.Data.Models
 		public List<RecipeInstruction> RecipeInstructions { get; set; }
 
 		/// <summary>
-		/// Category Id's of this recipe
+		/// Categories of this recipe
 		/// </summary>
-		public List<Guid> RecipeCategoryIds { get; set; }
+		public List<RecipeCategoryRecipe> Categories { get; set; }
 
 		/// <summary>
 		/// Rating of this recipe

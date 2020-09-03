@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Kitchn.Data.Models
 {
@@ -22,5 +23,10 @@ namespace Kitchn.Data.Models
 		/// Can be null to indicate top-level recipe category
 		/// </summary>
 		public Guid? RecipeCategoryId { get; set; }
+
+		/// <summary>
+		/// Recipes of this category
+		/// </summary>
+		public List<RecipeCategoryRecipe> Recipes { get; set; }
 	}
 }

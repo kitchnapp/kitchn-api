@@ -33,6 +33,19 @@ namespace Kitchn.Data
 		/// </summary>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<RecipeCategoryRecipe>()
+				.HasKey(t => new { t.RecipeId, t.RecipeCategoryId });
+
+			modelBuilder.Entity<RecipeCategoryRecipe>()
+				.HasOne(pt => pt.Recipe)
+				.WithMany(p => p.Categories)
+				.HasForeignKey(pt => pt.RecipeId);
+
+			modelBuilder.Entity<RecipeCategoryRecipe>()
+				.HasOne(pt => pt.RecipeCategory)
+				.WithMany(t => t.Recipes)
+				.HasForeignKey(pt => pt.RecipeCategoryId);
+
 			if (Seed)
 			{
 				modelBuilder.Entity<Location>().HasData(
@@ -78,6 +91,11 @@ namespace Kitchn.Data
 		public DbSet<Models.Product> Products { get; set; }
 
 		/// <summary>
+		/// List of products
+		/// </summary>
+		public DbSet<Models.ProductMeasurement> ProductMeasurements { get; set; }
+
+		/// <summary>
 		/// List of measurements
 		/// </summary>
 		public DbSet<Models.Measurement> Measurements { get; set; }
@@ -106,5 +124,10 @@ namespace Kitchn.Data
 		/// List of recipes
 		/// </summary>
 		public DbSet<Models.Recipe> Recipes { get; set; }
+
+		/// <summary>
+		/// List of recipe instructions
+		/// </summary>
+		public DbSet<Models.RecipeInstruction> RecipeInstructions { get; set; }
 	}
 }
