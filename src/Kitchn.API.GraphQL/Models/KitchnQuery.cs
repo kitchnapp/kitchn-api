@@ -11,24 +11,6 @@ namespace Kitchn.API.GraphQL.Models
 	{
 		public KitchnQuery(KitchnDbContext dbContext)
 		{
-			Field<ProductType>(
-				"product",
-				"Get product by ID",
-				arguments: new QueryArguments(
-					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
-				),
-				resolve: context =>
-				{
-					var id = context.GetArgument<Guid>("id");
-
-					return new Product
-					{
-						Id = id,
-						Name = "Test"
-					};
-				}
-			);
-
 			Field<Locations.LocationType>(
 				"location",
 				"Get location by ID",
