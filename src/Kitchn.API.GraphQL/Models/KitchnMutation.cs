@@ -20,9 +20,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var location = context.GetArgument<Locations.Location>("location");
 
+					location.Id = Guid.NewGuid();
+
 					dbContext.Locations.Add(new Kitchn.Data.Models.Location
 					{
-						Id = Guid.NewGuid(),
+						Id = location.Id,
 						Name = location.Name
 					});
 					dbContext.SaveChanges();
@@ -102,9 +104,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var measurement = context.GetArgument<Measurements.Measurement>("measurement");
 
+					measurement.Id = Guid.NewGuid();
+
 					dbContext.Measurements.Add(new Kitchn.Data.Models.Measurement
 					{
-						Id = Guid.NewGuid(),
+						Id = measurement.Id,
 						Name = measurement.Name,
 						MultipleName = measurement.MultipleName
 					});
@@ -188,9 +192,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var chore = context.GetArgument<Chores.Chore>("chore");
 
+					chore.Id = Guid.NewGuid();
+
 					dbContext.Chores.Add(new Kitchn.Data.Models.Chore
 					{
-						Id = Guid.NewGuid(),
+						Id = chore.Id,
 						Title = chore.Title,
 						Description = chore.Description
 					});
@@ -274,9 +280,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var recipecategory = context.GetArgument<RecipeCategories.RecipeCategory>("recipecategory");
 
+					recipecategory.Id = Guid.NewGuid();
+
 					dbContext.RecipeCategories.Add(new Kitchn.Data.Models.RecipeCategory
 					{
-						Id = Guid.NewGuid(),
+						Id = recipecategory.Id,
 						Name = recipecategory.Name
 					});
 					dbContext.SaveChanges();
@@ -356,9 +364,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var recipe = context.GetArgument<Recipes.Recipe>("recipe");
 
+					recipe.Id = Guid.NewGuid();
+
 					dbContext.Recipes.Add(new Kitchn.Data.Models.Recipe
 					{
-						Id = Guid.NewGuid(),
+						Id = recipe.Id,
 						Name = recipe.Name,
 						Description = recipe.Description,
 						Rating = recipe.Rating
