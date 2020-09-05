@@ -193,7 +193,7 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Recipes
+					return dbContext.RecipeCategories
 						.Where(q => q.Id == id)
 						.Select(recipe => new RecipeCategories.RecipeCategory
 						{
