@@ -345,6 +345,96 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<Recipes.RecipeType>(
+				"createRecipe",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<Recipes.RecipeInputType>> { Name = "recipe" }
+				),
+				resolve: context =>
+				{
+					var recipe = context.GetArgument<Recipes.Recipe>("recipe");
+
+					dbContext.Recipes.Add(new Kitchn.Data.Models.Recipe
+					{
+						Id = Guid.NewGuid(),
+						Name = recipe.Name,
+						Description = recipe.Description,
+						Rating = recipe.Rating
+					});
+					dbContext.SaveChanges();
+
+					return recipe;
+				}
+			);
+
+			Field<Recipes.RecipeType>(
+				"updateRecipe",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<Recipes.RecipeInputType>> { Name = "recipe" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var recipe = context.GetArgument<Recipes.Recipe>("recipe");
+
+					var dbRecipe = dbContext.Recipes
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbRecipe == null)
+					{
+						return null;
+					}
+
+					dbRecipe.Name = recipe.Name ?? dbRecipe.Name;
+					dbRecipe.Description = recipe.Description ?? dbRecipe.Description;
+					dbRecipe.Rating = recipe.Rating ?? dbRecipe.Rating;
+
+					dbContext.Recipes.Update(dbRecipe);
+					dbContext.SaveChanges();
+
+					return new Recipes.Recipe
+					{
+						Id = dbRecipe.Id,
+						Name = dbRecipe.Name,
+						Description = dbRecipe.Description,
+						Rating = dbRecipe.Rating
+					};
+				}
+			);
+
+			Field<Recipes.RecipeType>(
+				"deleteRecipe",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbRecipe = dbContext.Recipes
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbRecipe == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbRecipe);
+					dbContext.SaveChanges();
+
+					return new Recipes.Recipe
+					{
+						Id = dbRecipe.Id,
+						Name = dbRecipe.Name,
+						Description = dbRecipe.Description,
+						Rating = dbRecipe.Rating
+					};
+				}
+			);
 		}
 	}
 }

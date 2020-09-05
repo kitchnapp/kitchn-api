@@ -22,8 +22,10 @@ namespace Kitchn.API.GraphQL
 				options.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=password")
 			);
 
-			services.AddScoped<Models.RecipeCategories.RecipeCategoryType>();
+			services.AddScoped<Models.Recipes.RecipeInputType>();
 			services.AddScoped<Models.Recipes.RecipeType>();
+			services.AddScoped<Models.RecipeCategories.RecipeCategoryInputType>();
+			services.AddScoped<Models.RecipeCategories.RecipeCategoryType>();
 			services.AddScoped<Models.Chores.ChoreInputType>();
 			services.AddScoped<Models.Chores.ChoreType>();
 			services.AddScoped<Models.Locations.LocationInputType>();
