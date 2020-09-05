@@ -3,6 +3,7 @@ using System.Linq;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models
 {
@@ -424,6 +425,48 @@ namespace Kitchn.API.GraphQL.Models
 					}
 
 					dbContext.Remove(dbRecipe);
+					dbContext.SaveChanges();
+
+					return new Recipes.Recipe
+					{
+						Id = dbRecipe.Id,
+						Name = dbRecipe.Name,
+						Description = dbRecipe.Description,
+						Rating = dbRecipe.Rating
+					};
+				}
+			);
+
+			Field<Recipes.RecipeType>(
+				"addRecipeToCategory",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "recipeId" },
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "recipeCategoryId" }
+				),
+				resolve: context =>
+				{
+					var recipeId = context.GetArgument<Guid>("recipeId");
+					var recipeCategoryId = context.GetArgument<Guid>("recipeCategoryId");
+
+					var dbRecipe = dbContext.Recipes
+						.Include(o => o.Categories)
+						.Where(q => q.Id == recipeId)
+						.FirstOrDefault();
+
+					var dbRecipeCategory = dbContext.RecipeCategories
+						.Where(q => q.Id == recipeCategoryId)
+						.FirstOrDefault();
+
+					if (dbRecipe == null || dbRecipeCategory == null)
+					{
+						return null;
+					}
+
+					dbRecipe.Categories.Add(new Data.Models.RecipeCategoryRecipe
+					{
+						Recipe = dbRecipe,
+						RecipeCategory = dbRecipeCategory
+					});
 					dbContext.SaveChanges();
 
 					return new Recipes.Recipe
