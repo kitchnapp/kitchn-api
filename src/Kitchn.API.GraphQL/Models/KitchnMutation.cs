@@ -263,6 +263,88 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<RecipeCategories.RecipeCategoryType>(
+				"createRecipeCategory",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<RecipeCategories.RecipeCategoryInputType>> { Name = "recipecategory" }
+				),
+				resolve: context =>
+				{
+					var recipecategory = context.GetArgument<RecipeCategories.RecipeCategory>("recipecategory");
+
+					dbContext.RecipeCategories.Add(new Kitchn.Data.Models.RecipeCategory
+					{
+						Id = Guid.NewGuid(),
+						Name = recipecategory.Name
+					});
+					dbContext.SaveChanges();
+
+					return recipecategory;
+				}
+			);
+
+			Field<RecipeCategories.RecipeCategoryType>(
+				"updateRecipeCategory",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<RecipeCategories.RecipeCategoryInputType>> { Name = "recipecategory" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var recipecategory = context.GetArgument<RecipeCategories.RecipeCategory>("recipecategory");
+
+					var dbRecipeCategory = dbContext.RecipeCategories
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbRecipeCategory == null)
+					{
+						return null;
+					}
+
+					dbRecipeCategory.Name = recipecategory.Name ?? dbRecipeCategory.Name;
+
+					dbContext.RecipeCategories.Update(dbRecipeCategory);
+					dbContext.SaveChanges();
+
+					return new RecipeCategories.RecipeCategory
+					{
+						Id = dbRecipeCategory.Id,
+						Name = dbRecipeCategory.Name
+					};
+				}
+			);
+
+			Field<RecipeCategories.RecipeCategoryType>(
+				"deleteRecipeCategory",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbRecipeCategory = dbContext.RecipeCategories
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbRecipeCategory == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbRecipeCategory);
+					dbContext.SaveChanges();
+
+					return new RecipeCategories.RecipeCategory
+					{
+						Id = dbRecipeCategory.Id,
+						Name = dbRecipeCategory.Name
+					};
+				}
+			);
 		}
 	}
 }
