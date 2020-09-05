@@ -252,7 +252,7 @@ namespace Kitchn.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

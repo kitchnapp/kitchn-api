@@ -36,6 +36,6 @@ namespace Kitchn.Data.Models
 		/// <summary>
 		/// Rating of this recipe
 		/// </summary>
-		public int Rating { get; set; }
+		public int? Rating { get; set; }
 	}
 }
