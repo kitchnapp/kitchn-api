@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    restart: unless-stopped
+
+  api:
+    image: kitchn:test
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__KitchnDb: Host=db;Database=postgres;Username=postgres;Password=password
+    ports:
+      - 80:80
