@@ -30,6 +30,19 @@ namespace Kitchn.API.GraphQL.Models.Products
 							.FirstOrDefault();
 				}
 			);
+
+			Field<ListGraphType<Models.ProductBarcodes.ProductBarcodeType>>("barcodes", "The barcodes for the product.",
+				resolve: context =>
+				{
+					return dbContext.ProductBarcodes
+							.Where(q => q.ProductId == context.Source.Id)
+							.Select(productBarcode => new ProductBarcodes.ProductBarcode
+							{
+								Id = productBarcode.Id,
+								Barcode = productBarcode.Barcode,
+							});
+				}
+			);
 		}
 	}
 }
