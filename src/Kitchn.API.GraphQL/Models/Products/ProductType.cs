@@ -1,17 +1,32 @@
+using System.Linq;
 using GraphQL;
 using GraphQL.Types;
+using Kitchn.Data;
 
 namespace Kitchn.API.GraphQL.Models.Products
 {
 	public class ProductType : ObjectGraphType<Product>
 	{
-		public ProductType()
+		public ProductType(KitchnDbContext dbContext)
 		{
 			Name = "Product";
 			Description = "A product in the system.";
 
 			Field(x => x.Id).Description("The ID of the product.");
 			Field(x => x.Name).Description("The name of the product.");
+
+			Field<Models.Locations.LocationType>("defaultLocation", "The default location for this product.",
+				resolve: context =>
+				{
+					return dbContext.Locations
+							.Where(q => q.Id == context.Source.Id)
+							.Select(location => new Locations.Location
+							{
+								Id = location.Id,
+								Name = location.Name,
+							});
+				}
+			);
 		}
 	}
 }
