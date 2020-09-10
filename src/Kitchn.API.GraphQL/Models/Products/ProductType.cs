@@ -14,8 +14,10 @@ namespace Kitchn.API.GraphQL.Models.Products
 
 			Field(x => x.Id).Description("The ID of the product.");
 			Field(x => x.Name).Description("The name of the product.");
+			Field<TimeSpanSecondsGraphType>("defaultBestBefore", "The default best before window for the product.");
+			Field<TimeSpanSecondsGraphType>("defaultConsumeWithin", "The default consuming window for the product.");
 
-			Field<Models.Locations.LocationType>("defaultLocation", "The default location for this product.",
+			Field<Models.Locations.LocationType>("defaultLocation", "The default location for the product.",
 				resolve: context =>
 				{
 					return dbContext.Locations
