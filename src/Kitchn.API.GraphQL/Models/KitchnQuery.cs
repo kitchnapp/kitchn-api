@@ -26,7 +26,10 @@ namespace Kitchn.API.GraphQL.Models
 						.Select(product => new Products.Product
 						{
 							Id = product.Id,
-							Name = product.Name
+							Name = product.Name,
+							DefaultBestBefore = product.DefaultBestBeforeDateDifference,
+							DefaultConsumeWithin = product.DefaultConsumeWithinDays,
+							DefaultLocationId = product.DefaultLocationId
 						})
 						.FirstOrDefault();
 				}

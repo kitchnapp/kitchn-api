@@ -21,7 +21,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 				resolve: context =>
 				{
 					return dbContext.Locations
-							.Where(q => q.Id == context.Source.Id)
+							.Where(q => q.Id == context.Source.DefaultLocationId)
 							.Select(location => new Locations.Location
 							{
 								Id = location.Id,
