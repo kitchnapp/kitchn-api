@@ -11,6 +11,43 @@ namespace Kitchn.API.GraphQL.Models
 	{
 		public KitchnQuery(KitchnDbContext dbContext)
 		{
+			Field<Products.ProductType>(
+				"product",
+				"Get product by ID",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					return dbContext.Products
+						.Where(q => q.Id == id)
+						.Select(product => new Products.Product
+						{
+							Id = product.Id,
+							Name = product.Name
+						})
+						.FirstOrDefault();
+				}
+			);
+
+			Field<ListGraphType<Products.ProductType>>(
+				"products",
+				"Get product by search",
+				arguments: new QueryArguments(
+					new QueryArgument<StringGraphType> { Name = "barcode" },
+					new QueryArgument<StringGraphType> { Name = "search" }
+				),
+				resolve: context =>
+				{
+					var barcode = context.GetArgument<string>("barcode");
+					var search = context.GetArgument<string>("search");
+
+					return new List<Products.Product>();
+				}
+			);
+
 			Field<Locations.LocationType>(
 				"location",
 				"Get location by ID",

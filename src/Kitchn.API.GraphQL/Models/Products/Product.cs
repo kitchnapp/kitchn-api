@@ -1,6 +1,6 @@
 using System;
 
-namespace Kitchn.API.GraphQL.Models
+namespace Kitchn.API.GraphQL.Models.Products
 {
 	public class Product
 	{
