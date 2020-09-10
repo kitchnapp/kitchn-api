@@ -26,7 +26,8 @@ namespace Kitchn.API.GraphQL.Models.Products
 							{
 								Id = location.Id,
 								Name = location.Name,
-							});
+							})
+							.FirstOrDefault();
 				}
 			);
 		}
