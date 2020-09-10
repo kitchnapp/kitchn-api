@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Kitchn.Data.Models
 {
@@ -36,5 +37,15 @@ namespace Kitchn.Data.Models
 		/// Default best-before difference to pre-fill upon adding
 		/// </summary>
 		public TimeSpan? DefaultBestBeforeDateDifference { get; set; }
+
+		/// <summary>
+		/// Barcodes of this product
+		/// </summary>
+		public List<ProductBarcode> ProductBarcodes { get; set; }
+
+		/// <summary>
+		/// Stocked items of this product
+		/// </summary>
+		public List<StockedItem> StockedItems { get; set; }
 	}
 }
