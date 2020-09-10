@@ -488,6 +488,102 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<Products.ProductType>(
+				"createProduct",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<Products.ProductInputType>> { Name = "product" }
+				),
+				resolve: context =>
+				{
+					var product = context.GetArgument<Products.Product>("product");
+
+					product.Id = Guid.NewGuid();
+
+					dbContext.Products.Add(new Kitchn.Data.Models.Product
+					{
+						Id = product.Id,
+						Name = product.Name,
+						DefaultBestBeforeDateDifference = product.DefaultBestBefore,
+						DefaultLocationId = product.DefaultLocationId,
+						DefaultConsumeWithinDays = product.DefaultConsumeWithin
+					});
+					dbContext.SaveChanges();
+
+					return product;
+				}
+			);
+
+			Field<Products.ProductType>(
+				"updateProduct",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<Products.ProductInputType>> { Name = "product" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var product = context.GetArgument<Products.Product>("product");
+
+					var dbProduct = dbContext.Products
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbProduct == null)
+					{
+						return null;
+					}
+
+					dbProduct.Name = product.Name ?? dbProduct.Name;
+					dbProduct.DefaultBestBeforeDateDifference = product.DefaultBestBefore ?? dbProduct.DefaultBestBeforeDateDifference;
+					dbProduct.DefaultLocationId = product.DefaultLocationId ?? dbProduct.DefaultLocationId;
+					dbProduct.DefaultConsumeWithinDays = product.DefaultConsumeWithin ?? dbProduct.DefaultConsumeWithinDays;
+
+					dbContext.Products.Update(dbProduct);
+					dbContext.SaveChanges();
+
+					return new Products.Product
+					{
+						Id = dbProduct.Id,
+						Name = dbProduct.Name,
+						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
+						DefaultLocationId = dbProduct.DefaultLocationId,
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays
+					};
+				}
+			);
+
+			Field<Products.ProductType>(
+				"deleteProduct",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbProduct = dbContext.Products
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbProduct == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbProduct);
+					dbContext.SaveChanges();
+
+					return new Products.Product
+					{
+						Id = dbProduct.Id,
+						Name = dbProduct.Name,
+						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
+						DefaultLocationId = dbProduct.DefaultLocationId,
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays
+					};
+				}
+			);
 		}
 	}
 }
