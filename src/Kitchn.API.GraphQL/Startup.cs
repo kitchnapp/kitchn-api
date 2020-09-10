@@ -9,17 +9,26 @@ using Microsoft.Extensions.Logging;
 using GraphQL.Server.Ui.Playground;
 using Kitchn.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace Kitchn.API.GraphQL
 {
 	public class Startup
 	{
+		public IConfiguration Configuration { get; }
+
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
+
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<KitchnDbContext>(options =>
-				options.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=password")
+				options.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"])
 			);
 
 			services.AddScoped<KitchnQuery>();
@@ -56,6 +65,19 @@ namespace Kitchn.API.GraphQL
 
 			// use graphql-playground middleware at default url /ui/playground
 			app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
+			optionsBuilder.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"]);
+
+			ApplyMigrations(new KitchnDbContext(optionsBuilder.Options));
+		}
+
+		public void ApplyMigrations(KitchnDbContext context)
+		{
+			if (context.Database.GetPendingMigrations().Any())
+			{
+				context.Database.Migrate();
+			}
 		}
 	}
 }
