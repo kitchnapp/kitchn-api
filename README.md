@@ -9,7 +9,6 @@ It aims to be easy to setup, configurable and reliable.
 With Docker Compose:
 
 ```bash
-docker build . -t kitchn:test
 docker-compose up
 ```
 
