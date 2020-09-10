@@ -4,6 +4,7 @@ using System.Linq;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models
 {
@@ -47,7 +48,16 @@ namespace Kitchn.API.GraphQL.Models
 					var barcode = context.GetArgument<string>("barcode");
 					var search = context.GetArgument<string>("search");
 
-					return new List<Products.Product>();
+					return dbContext.Products
+						.Where(q => search == null || EF.Functions.Like(q.Name, search))
+						.Select(product => new Products.Product
+						{
+							Id = product.Id,
+							Name = product.Name,
+							DefaultBestBefore = product.DefaultBestBeforeDateDifference,
+							DefaultConsumeWithin = product.DefaultConsumeWithinDays,
+							DefaultLocationId = product.DefaultLocationId
+						});
 				}
 			);
 
