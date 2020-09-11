@@ -584,6 +584,46 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<Products.ProductType>(
+				"applyBarcodeToProduct",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "productId" },
+					new QueryArgument<NonNullGraphType<ProductBarcodes.ProductBarcodeInputType>> { Name = "barcode" }
+				),
+				resolve: context =>
+				{
+					var barcode = context.GetArgument<ProductBarcodes.ProductBarcode>("barcode");
+					var productId = context.GetArgument<Guid>("productId");
+
+					barcode.Id = Guid.NewGuid();
+
+					var dbProduct = dbContext.Products.Where(p => p.Id == productId).FirstOrDefault();
+
+					if (dbProduct == null)
+					{
+						return null;
+					}
+
+					dbContext.ProductBarcodes.Add(new Data.Models.ProductBarcode
+					{
+						Id = barcode.Id,
+						Barcode = barcode.Barcode,
+						ProductId = productId
+					});
+
+					dbContext.SaveChanges();
+
+					return new Products.Product
+					{
+						Id = dbProduct.Id,
+						Name = dbProduct.Name,
+						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays,
+						DefaultLocationId = dbProduct.DefaultLocationId
+					};
+				}
+			);
 		}
 	}
 }
