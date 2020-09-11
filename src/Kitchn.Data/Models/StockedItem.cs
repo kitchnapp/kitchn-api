@@ -25,7 +25,7 @@ namespace Kitchn.Data.Models
 		/// <summary>
 		/// Current location of this stocked item
 		/// </summary>
-		public Guid LocationId { get; set; }
+		public Guid? LocationId { get; set; }
 
 		/// <summary>
 		/// Navigation property for the location of this stock
