@@ -48,7 +48,15 @@ namespace Kitchn.API.GraphQL.Models
 					var barcode = context.GetArgument<string>("barcode");
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Products
+					IQueryable<Data.Models.Product> baseQuery = dbContext.Products;
+					if (!string.IsNullOrEmpty(barcode))
+					{
+						baseQuery = baseQuery
+							.Include(product => product.ProductBarcodes)
+							.Where(q => q.ProductBarcodes.Any(b => b.Barcode == barcode));
+					}
+
+					return baseQuery
 						.Where(q => search == null || EF.Functions.Like(q.Name, search))
 						.Select(product => new Products.Product
 						{
