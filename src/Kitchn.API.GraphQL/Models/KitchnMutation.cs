@@ -624,6 +624,109 @@ namespace Kitchn.API.GraphQL.Models
 					};
 				}
 			);
+
+			Field<StockedItems.StockedItemType>(
+				"createStockedItem",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<StockedItems.StockedItemInputType>> { Name = "stockedItem" }
+				),
+				resolve: context =>
+				{
+					var stockeditem = context.GetArgument<StockedItems.StockedItem>("stockedItem");
+
+					if (stockeditem.ProductId == null)
+					{
+						// ProductId is required
+						return null;
+					}
+
+					stockeditem.Id = Guid.NewGuid();
+
+					dbContext.StockedItems.Add(new Kitchn.Data.Models.StockedItem
+					{
+						Id = stockeditem.Id,
+						ProductId = stockeditem.ProductId.Value,
+						LocationId = stockeditem.LocationId,
+						ExpiryDate = stockeditem.ExpiryDate,
+						OpenedDate = stockeditem.OpenedDate
+					});
+					dbContext.SaveChanges();
+
+					return stockeditem;
+				}
+			);
+
+			Field<StockedItems.StockedItemType>(
+				"updateStockedItem",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<StockedItems.StockedItemInputType>> { Name = "stockedItem" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var stockeditem = context.GetArgument<StockedItems.StockedItem>("stockedItem");
+
+					var dbStockedItem = dbContext.StockedItems
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbStockedItem == null)
+					{
+						return null;
+					}
+
+					dbStockedItem.ProductId = stockeditem.ProductId ?? dbStockedItem.ProductId;
+					dbStockedItem.LocationId = stockeditem.LocationId ?? dbStockedItem.LocationId;
+					dbStockedItem.ExpiryDate = stockeditem.ExpiryDate ?? dbStockedItem.ExpiryDate;
+					dbStockedItem.OpenedDate = stockeditem.OpenedDate ?? dbStockedItem.OpenedDate;
+
+					dbContext.StockedItems.Update(dbStockedItem);
+					dbContext.SaveChanges();
+
+					return new StockedItems.StockedItem
+					{
+						Id = dbStockedItem.Id,
+						ProductId = dbStockedItem.ProductId,
+						LocationId = dbStockedItem.LocationId,
+						ExpiryDate = dbStockedItem.ExpiryDate,
+						OpenedDate = dbStockedItem.OpenedDate
+					};
+				}
+			);
+
+			Field<StockedItems.StockedItemType>(
+				"deleteStockedItem",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbStockedItem = dbContext.StockedItems
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbStockedItem == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbStockedItem);
+					dbContext.SaveChanges();
+
+					return new StockedItems.StockedItem
+					{
+						Id = dbStockedItem.Id,
+						ProductId = dbStockedItem.ProductId,
+						LocationId = dbStockedItem.LocationId,
+						ExpiryDate = dbStockedItem.ExpiryDate,
+						OpenedDate = dbStockedItem.OpenedDate
+					};
+				}
+			);
+
 		}
 	}
 }
