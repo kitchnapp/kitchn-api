@@ -101,12 +101,12 @@ namespace Kitchn.API.GraphQL.Models
 					var search = context.GetArgument<string>("search");
 
 					return dbContext.Locations
-							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(location => new Locations.Location
-							{
-								Id = location.Id,
-								Name = location.Name
-							});
+						.Where(q => q.Name.Contains(search) || search == null)
+						.Select(location => new Locations.Location
+						{
+							Id = location.Id,
+							Name = location.Name
+						});
 				}
 			);
 
@@ -121,13 +121,13 @@ namespace Kitchn.API.GraphQL.Models
 					var search = context.GetArgument<string>("search");
 
 					return dbContext.Measurements
-							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(measurement => new Measurements.Measurement
-							{
-								Id = measurement.Id,
-								Name = measurement.Name,
-								MultipleName = measurement.MultipleName
-							});
+						.Where(q => q.Name.Contains(search) || search == null)
+						.Select(measurement => new Measurements.Measurement
+						{
+							Id = measurement.Id,
+							Name = measurement.Name,
+							MultipleName = measurement.MultipleName
+						});
 				}
 			);
 
@@ -164,13 +164,13 @@ namespace Kitchn.API.GraphQL.Models
 					var search = context.GetArgument<string>("search");
 
 					return dbContext.Chores
-							.Where(q => q.Title.Contains(search) || search == null)
-							.Select(chore => new Chores.Chore
-							{
-								Id = chore.Id,
-								Title = chore.Title,
-								Description = chore.Description
-							});
+						.Where(q => q.Title.Contains(search) || search == null)
+						.Select(chore => new Chores.Chore
+						{
+							Id = chore.Id,
+							Title = chore.Title,
+							Description = chore.Description
+						});
 				}
 			);
 
@@ -207,14 +207,14 @@ namespace Kitchn.API.GraphQL.Models
 					var search = context.GetArgument<string>("search");
 
 					return dbContext.Recipes
-							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(recipe => new Recipes.Recipe
-							{
-								Id = recipe.Id,
-								Name = recipe.Name,
-								Description = recipe.Description,
-								Rating = recipe.Rating
-							});
+						.Where(q => q.Name.Contains(search) || search == null)
+						.Select(recipe => new Recipes.Recipe
+						{
+							Id = recipe.Id,
+							Name = recipe.Name,
+							Description = recipe.Description,
+							Rating = recipe.Rating
+						});
 				}
 			);
 
@@ -273,12 +273,12 @@ namespace Kitchn.API.GraphQL.Models
 					var search = context.GetArgument<string>("search");
 
 					return dbContext.RecipeCategories
-							.Where(q => q.Name.Contains(search) || search == null)
-							.Select(recipe => new RecipeCategories.RecipeCategory
-							{
-								Id = recipe.Id,
-								Name = recipe.Name
-							});
+						.Where(q => q.Name.Contains(search) || search == null)
+						.Select(recipe => new RecipeCategories.RecipeCategory
+						{
+							Id = recipe.Id,
+							Name = recipe.Name
+						});
 				}
 			);
 
