@@ -281,6 +281,23 @@ namespace Kitchn.API.GraphQL.Models
 							});
 				}
 			);
+
+			Field<ListGraphType<StockedItems.StockedItemType>>(
+				"stockedItems",
+				"Get a list of stocked items",
+				resolve: context =>
+				{
+					return dbContext.StockedItems
+						.Select(stockedItem => new StockedItems.StockedItem
+						{
+							Id = stockedItem.Id,
+							ProductId = stockedItem.ProductId,
+							OpenedDate = stockedItem.OpenedDate,
+							ExpiryDate = stockedItem.ExpiryDate,
+							LocationId = stockedItem.LocationId
+						});
+				}
+			);
 		}
 	}
 }
