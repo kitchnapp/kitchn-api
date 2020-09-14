@@ -30,3 +30,12 @@ Change the connection string in `KitchnDbContextFactory.cs` to the comparison da
 ```bash
 dotnet ef migrations add --project src/Kitchn.Data <Name>
 ```
+
+## GraphQL API
+
+The URLs which are availabe are:
+
+- GraphQL Query Endpoint: `/graphql`
+- GraphQL Playground: `/ui/playground`
+- GraphQL Voyager: `/ui/playground`
+- GraphQL Altair: `/ui/altair`
