@@ -9,6 +9,7 @@ It aims to be easy to setup, configurable and reliable.
 With Docker Compose:
 
 ```bash
+docker-compose build
 docker-compose up
 ```
 
