@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Kitchn.API.GraphQL.Models;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
+using GraphQL.Server.Ui.Voyager;
 using Microsoft.Extensions.Logging;
 using GraphQL.Server.Ui.Playground;
 using Kitchn.Data;
@@ -65,6 +66,9 @@ namespace Kitchn.API.GraphQL
 
 			// use graphql-playground middleware at default url /ui/playground
 			app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+			// use graphql-playground middleware at default url /ui/voyager
+			app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
 
 			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
 			optionsBuilder.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"]);
