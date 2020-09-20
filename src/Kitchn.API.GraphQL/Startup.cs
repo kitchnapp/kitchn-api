@@ -28,6 +28,29 @@ namespace Kitchn.API.GraphQL
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+			{
+				options.AddPolicy("AllowAll",
+					builder =>
+					{
+						builder
+							.AllowAnyOrigin()
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					});
+
+				options.AddPolicy("AllowSpecific",
+					builder =>
+					{
+						var origins = Configuration["Cors:Origins"].Split(";");
+
+						builder
+							.WithOrigins(origins)
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					});
+			});
+
 			services.AddDbContext<KitchnDbContext>(options =>
 				options.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"])
 			);
@@ -56,6 +79,8 @@ namespace Kitchn.API.GraphQL
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseCors(Configuration["Cors:Policy"]);
 
 			app.UseWebSockets();
 
