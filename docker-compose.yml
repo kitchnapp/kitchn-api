@@ -4,6 +4,7 @@ services:
   db:
     image: postgres
     environment:
+      # The password for the postgres image.
       POSTGRES_PASSWORD: password
     restart: unless-stopped
 
@@ -14,6 +15,13 @@ services:
     depends_on:
       - db
     environment:
-      ConnectionStrings__KitchnDb: Host=db;Database=postgres;Username=postgres;Password=password
+      # By default, the database is the same as the username.
+      ConnectionStrings__KitchnDb: Host=db;Database=postgres;Username=postgres;Password=password;Port=5432
+      # Cors__Policy can be `AllowAll` or `AllowSpecific`.
+      #   If Cors__Policy is set to `AllowSpecific`, only the origins specified in
+      #   `Cors__Origins` will be allowed to access the Kitchn API resource.
+      Cors__Policy: AllowAll
+      Cors__Origins: "http://localhost;https://localhost"
     ports:
+      # By default, only exposes the non-SSL API interface.
       - 80:80
