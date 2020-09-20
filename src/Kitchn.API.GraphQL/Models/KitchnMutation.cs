@@ -233,12 +233,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Chores.Update(dbChore);
 					dbContext.SaveChanges();
 
-					return new Chores.Chore
-					{
-						Id = dbChore.Id,
-						Title = dbChore.Title,
-						Description = dbChore.Description
-					};
+					return mapper.Map<Chores.Chore>(dbChore);
 				}
 			);
 
@@ -263,12 +258,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbChore);
 					dbContext.SaveChanges();
 
-					return new Chores.Chore
-					{
-						Id = dbChore.Id,
-						Title = dbChore.Title,
-						Description = dbChore.Description,
-					};
+					return mapper.Map<Chores.Chore>(dbChore);
 				}
 			);
 
