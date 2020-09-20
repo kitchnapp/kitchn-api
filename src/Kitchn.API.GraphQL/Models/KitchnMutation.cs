@@ -59,11 +59,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Locations.Update(dbLocation);
 					dbContext.SaveChanges();
 
-					return new Locations.Location
-					{
-						Id = dbLocation.Id,
-						Name = dbLocation.Name
-					};
+					return mapper.Map<Locations.Location>(dbLocation);
 				}
 			);
 
@@ -88,11 +84,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbLocation);
 					dbContext.SaveChanges();
 
-					return new Locations.Location
-					{
-						Id = dbLocation.Id,
-						Name = dbLocation.Name
-					};
+					return mapper.Map<Locations.Location>(dbLocation);
 				}
 			);
 
@@ -145,12 +137,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Measurements.Update(dbMeasurement);
 					dbContext.SaveChanges();
 
-					return new Measurements.Measurement
-					{
-						Id = dbMeasurement.Id,
-						Name = dbMeasurement.Name,
-						MultipleName = dbMeasurement.MultipleName
-					};
+					return mapper.Map<Measurements.Measurement>(dbMeasurement);
 				}
 			);
 
@@ -175,12 +162,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbMeasurement);
 					dbContext.SaveChanges();
 
-					return new Measurements.Measurement
-					{
-						Id = dbMeasurement.Id,
-						Name = dbMeasurement.Name,
-						MultipleName = dbMeasurement.MultipleName
-					};
+					return mapper.Map<Measurements.Measurement>(dbMeasurement);
 				}
 			);
 
@@ -309,11 +291,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.RecipeCategories.Update(dbRecipeCategory);
 					dbContext.SaveChanges();
 
-					return new RecipeCategories.RecipeCategory
-					{
-						Id = dbRecipeCategory.Id,
-						Name = dbRecipeCategory.Name
-					};
+					return mapper.Map<RecipeCategories.RecipeCategory>(dbRecipeCategory);
 				}
 			);
 
