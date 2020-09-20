@@ -181,15 +181,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Chores
-						.Where(q => q.Id == id)
-						.Select(chore => new Chores.Chore
-						{
-							Id = chore.Id,
-							Title = chore.Title,
-							Description = chore.Description
-						})
-						.FirstOrDefault();
+					return mapper.Map<Chores.Chore>(
+						dbContext.Chores
+							.Where(q => q.Id == id)
+							.FirstOrDefault()
+					);
 				}
 			);
 
