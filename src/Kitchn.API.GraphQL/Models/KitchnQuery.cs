@@ -199,15 +199,10 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Recipes
-						.Where(q => q.Name.Contains(search) || search == null)
-						.Select(recipe => new Recipes.Recipe
-						{
-							Id = recipe.Id,
-							Name = recipe.Name,
-							Description = recipe.Description,
-							Rating = recipe.Rating
-						});
+					return mapper.Map<IEnumerable<Recipes.Recipe>>(
+						dbContext.Recipes
+							.Where(q => q.Name.Contains(search) || search == null)
+					);
 				}
 			);
 
@@ -221,16 +216,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Recipes
-						.Where(q => q.Id == id)
-						.Select(recipe => new Recipes.Recipe
-						{
-							Id = recipe.Id,
-							Name = recipe.Name,
-							Description = recipe.Description,
-							Rating = recipe.Rating
-						})
-						.FirstOrDefault();
+					return mapper.Map<IEnumerable<Recipes.Recipe>>(
+						dbContext.Recipes
+							.Where(q => q.Id == id)
+							.FirstOrDefault()
+					);
 				}
 			);
 

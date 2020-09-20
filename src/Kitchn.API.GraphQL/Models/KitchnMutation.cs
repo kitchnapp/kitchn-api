@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -9,7 +10,7 @@ namespace Kitchn.API.GraphQL.Models
 {
 	public class KitchnMutation : ObjectGraphType
 	{
-		public KitchnMutation(KitchnDbContext dbContext)
+		public KitchnMutation(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Field<Locations.LocationType>(
 				"createLocation",
@@ -406,13 +407,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Recipes.Update(dbRecipe);
 					dbContext.SaveChanges();
 
-					return new Recipes.Recipe
-					{
-						Id = dbRecipe.Id,
-						Name = dbRecipe.Name,
-						Description = dbRecipe.Description,
-						Rating = dbRecipe.Rating
-					};
+					return mapper.Map<Recipes.Recipe>(dbRecipe);
 				}
 			);
 
@@ -437,13 +432,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbRecipe);
 					dbContext.SaveChanges();
 
-					return new Recipes.Recipe
-					{
-						Id = dbRecipe.Id,
-						Name = dbRecipe.Name,
-						Description = dbRecipe.Description,
-						Rating = dbRecipe.Rating
-					};
+					return mapper.Map<Recipes.Recipe>(dbRecipe);
 				}
 			);
 
@@ -479,13 +468,7 @@ namespace Kitchn.API.GraphQL.Models
 					});
 					dbContext.SaveChanges();
 
-					return new Recipes.Recipe
-					{
-						Id = dbRecipe.Id,
-						Name = dbRecipe.Name,
-						Description = dbRecipe.Description,
-						Rating = dbRecipe.Rating
-					};
+					return mapper.Map<Recipes.Recipe>(dbRecipe);
 				}
 			);
 

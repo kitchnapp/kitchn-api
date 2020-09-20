@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -8,7 +10,7 @@ namespace Kitchn.API.GraphQL.Models.RecipeCategories
 {
 	public class RecipeCategoryType : ObjectGraphType<RecipeCategory>
 	{
-		public RecipeCategoryType(KitchnDbContext dbContext)
+		public RecipeCategoryType(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Name = "RecipeCategory";
 			Description = "A category to organise recipes.";
@@ -24,17 +26,12 @@ namespace Kitchn.API.GraphQL.Models.RecipeCategories
 				{
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Recipes
+					return mapper.Map<IEnumerable<Recipes.Recipe>>(
+						dbContext.Recipes
 							.Include(q => q.Categories)
 							.Where(q => q.Name.Contains(search) || search == null)
 							.Where(q => q.Categories.Where(q => q.RecipeCategoryId == context.Source.Id).Any())
-							.Select(recipe => new Recipes.Recipe
-							{
-								Id = recipe.Id,
-								Name = recipe.Name,
-								Description = recipe.Description,
-								Rating = recipe.Rating
-							});
+					);
 				}
 			);
 		}
