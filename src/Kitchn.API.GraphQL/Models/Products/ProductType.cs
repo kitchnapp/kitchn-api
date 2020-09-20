@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -7,7 +9,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 {
 	public class ProductType : ObjectGraphType<Product>
 	{
-		public ProductType(KitchnDbContext dbContext)
+		public ProductType(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Name = "Product";
 			Description = "A product in the system.";
@@ -20,27 +22,21 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<Models.Locations.LocationType>("defaultLocation", "The default location for the product.",
 				resolve: context =>
 				{
-					return dbContext.Locations
+					return mapper.Map<Locations.Location>(
+						dbContext.Locations
 							.Where(q => q.Id == context.Source.DefaultLocationId)
-							.Select(location => new Locations.Location
-							{
-								Id = location.Id,
-								Name = location.Name,
-							})
-							.FirstOrDefault();
+							.FirstOrDefault()
+					);
 				}
 			);
 
 			Field<ListGraphType<Models.ProductBarcodes.ProductBarcodeType>>("barcodes", "The barcodes for the product.",
 				resolve: context =>
 				{
-					return dbContext.ProductBarcodes
+					return mapper.Map<IEnumerable<ProductBarcodes.ProductBarcode>>(
+						dbContext.ProductBarcodes
 							.Where(q => q.ProductId == context.Source.Id)
-							.Select(productBarcode => new ProductBarcodes.ProductBarcode
-							{
-								Id = productBarcode.Id,
-								Barcode = productBarcode.Barcode,
-							});
+					);
 				}
 			);
 		}
