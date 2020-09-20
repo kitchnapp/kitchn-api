@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -10,7 +11,7 @@ namespace Kitchn.API.GraphQL.Models
 {
 	public class KitchnQuery : ObjectGraphType
 	{
-		public KitchnQuery(KitchnDbContext dbContext)
+		public KitchnQuery(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Field<Products.ProductType>(
 				"product",
@@ -163,14 +164,10 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Chores
-						.Where(q => q.Title.Contains(search) || search == null)
-						.Select(chore => new Chores.Chore
-						{
-							Id = chore.Id,
-							Title = chore.Title,
-							Description = chore.Description
-						});
+					return mapper.Map<IEnumerable<Chores.Chore>>(
+						dbContext.Chores
+							.Where(q => q.Title.Contains(search) || search == null)
+					);
 				}
 			);
 
