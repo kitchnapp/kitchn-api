@@ -32,6 +32,21 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 						});
 				}
 			);
+
+			Field<ListGraphType<RecipeInstructions.RecipeInstructionType>>("instructions", "The instructions of the recipe.",
+				resolve: context =>
+				{
+					return dbContext.RecipeInstructions
+						.Where(q => q.RecipeId == context.Source.Id)
+						.Select(recipeInstruction => new RecipeInstructions.RecipeInstruction
+						{
+							Id = recipeInstruction.Id,
+							Order = recipeInstruction.Order,
+							RecipeId = recipeInstruction.RecipeId,
+							Instructions = recipeInstruction.Instruction,
+						});
+				}
+			);
 		}
 	}
 }
