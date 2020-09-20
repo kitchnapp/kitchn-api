@@ -9,6 +9,7 @@ namespace Kitchn.API.GraphQL.Mappings
 			CreateMap<GraphQL.Models.Chores.Chore, Data.Models.Chore>();
 			CreateMap<GraphQL.Models.Locations.Location, Data.Models.Location>();
 			CreateMap<GraphQL.Models.Recipes.Recipe, Data.Models.Recipe>();
+			CreateMap<GraphQL.Models.RecipeInstructions.RecipeInstruction, Data.Models.RecipeInstruction>();
 			CreateMap<GraphQL.Models.Measurements.Measurement, Data.Models.Measurement>();
 		}
 	}
