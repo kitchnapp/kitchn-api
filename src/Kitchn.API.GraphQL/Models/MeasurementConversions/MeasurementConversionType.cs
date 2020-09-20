@@ -1,4 +1,5 @@
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -7,7 +8,7 @@ namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 {
 	public class MeasurementConversionType : ObjectGraphType<MeasurementConversion>
 	{
-		public MeasurementConversionType(KitchnDbContext dbContext)
+		public MeasurementConversionType(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Name = "MeasurementConversion";
 			Description = "A measurement conversion between two measurements.";
@@ -18,29 +19,21 @@ namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 			Field<Measurements.MeasurementType>("toMeasurement", "The measurement to convert from",
 				resolve: context =>
 				{
-					return dbContext.Measurements
-						.Where(o => o.Id == context.Source.ToMeasurementId)
-						.Select(dbMeasurement => new Measurements.Measurement
-						{
-							Id = dbMeasurement.Id,
-							Name = dbMeasurement.Name,
-							MultipleName = dbMeasurement.MultipleName,
-						})
-						.FirstOrDefault();
+					return mapper.Map<Measurements.Measurement>(
+						dbContext.Measurements
+							.Where(o => o.Id == context.Source.ToMeasurementId)
+							.FirstOrDefault()
+					);
 				});
 
 			Field<Measurements.MeasurementType>("fromMeasurement", "The measurement to convert from",
 				resolve: context =>
 				{
-					return dbContext.Measurements
-						.Where(o => o.Id == context.Source.FromMeasurementId)
-						.Select(dbMeasurement => new Measurements.Measurement
-						{
-							Id = dbMeasurement.Id,
-							Name = dbMeasurement.Name,
-							MultipleName = dbMeasurement.MultipleName,
-						})
-						.FirstOrDefault();
+					return mapper.Map<Measurements.Measurement>(
+						dbContext.Measurements
+							.Where(o => o.Id == context.Source.FromMeasurementId)
+							.FirstOrDefault()
+					);
 				});
 		}
 	}
