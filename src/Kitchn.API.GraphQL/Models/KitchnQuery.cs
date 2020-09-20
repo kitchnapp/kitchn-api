@@ -121,14 +121,10 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Measurements
-						.Where(q => q.Name.Contains(search) || search == null)
-						.Select(measurement => new Measurements.Measurement
-						{
-							Id = measurement.Id,
-							Name = measurement.Name,
-							MultipleName = measurement.MultipleName
-						});
+					return mapper.Map<IEnumerable<Measurements.Measurement>>(
+						dbContext.Measurements
+							.Where(q => q.Name.Contains(search) || search == null)
+					);
 				}
 			);
 
@@ -142,15 +138,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Measurements
-						.Where(q => q.Id == id)
-						.Select(measurement => new Measurements.Measurement
-						{
-							Id = measurement.Id,
-							Name = measurement.Name,
-							MultipleName = measurement.MultipleName
-						})
-						.FirstOrDefault();
+					return mapper.Map<Measurements.Measurement>(
+						dbContext.Measurements
+							.Where(q => q.Id == id)
+							.FirstOrDefault()
+					);
 				}
 			);
 
