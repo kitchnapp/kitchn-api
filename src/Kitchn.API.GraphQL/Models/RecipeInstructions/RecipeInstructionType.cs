@@ -16,7 +16,7 @@ namespace Kitchn.API.GraphQL.Models.RecipeInstructions
 
 			Field(x => x.Id).Description("The ID of the recipe instruction.");
 			Field<IntGraphType>("order", "The order of the recipe instruction.");
-			Field(x => x.Instructions).Description("The instruction of the step.");
+			Field(x => x.Instruction).Description("The instruction of the step.");
 
 			Field<Models.Recipes.RecipeType>("recipe", "The recipe for this instruction.",
 				resolve: context =>

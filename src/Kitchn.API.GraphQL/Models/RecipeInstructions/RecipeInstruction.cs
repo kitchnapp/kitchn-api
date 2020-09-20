@@ -7,6 +7,6 @@ namespace Kitchn.API.GraphQL.Models.RecipeInstructions
 		public Guid Id { get; set; }
 		public Guid? RecipeId { get; set; }
 		public int? Order { get; set; }
-		public string Instructions { get; set; }
+		public string Instruction { get; set; }
 	}
 }

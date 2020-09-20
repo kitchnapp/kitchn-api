@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.Data;
@@ -8,7 +10,7 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 {
 	public class RecipeType : ObjectGraphType<Recipe>
 	{
-		public RecipeType(KitchnDbContext dbContext)
+		public RecipeType(KitchnDbContext dbContext, IMapper mapper)
 		{
 			Name = "Recipe";
 			Description = "A recipe to follow to make a meal.";
@@ -36,15 +38,10 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 			Field<ListGraphType<RecipeInstructions.RecipeInstructionType>>("instructions", "The instructions of the recipe.",
 				resolve: context =>
 				{
-					return dbContext.RecipeInstructions
-						.Where(q => q.RecipeId == context.Source.Id)
-						.Select(recipeInstruction => new RecipeInstructions.RecipeInstruction
-						{
-							Id = recipeInstruction.Id,
-							Order = recipeInstruction.Order,
-							RecipeId = recipeInstruction.RecipeId,
-							Instructions = recipeInstruction.Instruction,
-						});
+					return mapper.Map<IEnumerable<RecipeInstructions.RecipeInstruction>>(
+						dbContext.RecipeInstructions
+							.Where(q => q.RecipeId == context.Source.Id)
+					);
 				}
 			);
 		}
