@@ -12,6 +12,7 @@ using Kitchn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using AutoMapper;
 
 namespace Kitchn.API.GraphQL
 {
@@ -70,6 +71,8 @@ namespace Kitchn.API.GraphQL
 				.AddSystemTextJson(deserializerSettings => { }, serializerSettings => { }) // For .NET Core 3+
 				.AddDataLoader() // Add required services for DataLoader support
 				.AddGraphTypes(typeof(KitchnSchema));
+
+			services.AddAutoMapper(typeof(Startup));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
