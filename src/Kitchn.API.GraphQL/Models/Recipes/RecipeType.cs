@@ -23,15 +23,13 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 			Field<ListGraphType<RecipeCategories.RecipeCategoryType>>("categories", "The categories of the recipe.",
 				resolve: context =>
 				{
-					return dbContext.Recipes
-						.Include(o => o.Categories)
-						.Where(q => q.Id == context.Source.Id)
-						.SelectMany(recipe => recipe.Categories)
-						.Select(categoryLink => new RecipeCategories.RecipeCategory
-						{
-							Id = categoryLink.RecipeCategory.Id,
-							Name = categoryLink.RecipeCategory.Name
-						});
+					return mapper.Map<RecipeCategories.RecipeCategory>(
+						dbContext.Recipes
+							.Include(o => o.Categories)
+							.Where(q => q.Id == context.Source.Id)
+							.SelectMany(recipe => recipe.Categories)
+							.Select(categoryLink => categoryLink.RecipeCategory)
+					);
 				}
 			);
 
