@@ -14,6 +14,7 @@ namespace Kitchn.API.GraphQL.Mappings
 			CreateMap<GraphQL.Models.Measurements.Measurement, Data.Models.Measurement>();
 			CreateMap<GraphQL.Models.MeasurementConversions.MeasurementConversion, Data.Models.MeasurementConversion>();
 			CreateMap<GraphQL.Models.ProductBarcodes.ProductBarcode, Data.Models.ProductBarcode>();
+			CreateMap<GraphQL.Models.StockedItems.StockedItem, Data.Models.StockedItem>();
 		}
 	}
 }
