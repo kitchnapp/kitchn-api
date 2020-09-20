@@ -11,6 +11,7 @@ namespace Kitchn.API.GraphQL.Mappings
 			CreateMap<Data.Models.Recipe, GraphQL.Models.Recipes.Recipe>();
 			CreateMap<Data.Models.RecipeInstruction, GraphQL.Models.RecipeInstructions.RecipeInstruction>();
 			CreateMap<Data.Models.Measurement, GraphQL.Models.Measurements.Measurement>();
+			CreateMap<Data.Models.ProductBarcode, GraphQL.Models.ProductBarcodes.ProductBarcode>();
 		}
 	}
 }
