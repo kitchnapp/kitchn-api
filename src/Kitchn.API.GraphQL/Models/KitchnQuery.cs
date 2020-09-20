@@ -80,14 +80,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Locations
-						.Where(q => q.Id == id)
-						.Select(location => new Locations.Location
-						{
-							Id = location.Id,
-							Name = location.Name
-						})
-						.FirstOrDefault();
+					return mapper.Map<Locations.Location>(
+						dbContext.Locations
+							.Where(q => q.Id == id)
+							.FirstOrDefault()
+					);
 				}
 			);
 
@@ -101,13 +98,10 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var search = context.GetArgument<string>("search");
 
-					return dbContext.Locations
-						.Where(q => q.Name.Contains(search) || search == null)
-						.Select(location => new Locations.Location
-						{
-							Id = location.Id,
-							Name = location.Name
-						});
+					return mapper.Map<IEnumerable<Locations.Location>>(
+						dbContext.Locations
+							.Where(q => q.Name.Contains(search) || search == null)
+					);
 				}
 			);
 
