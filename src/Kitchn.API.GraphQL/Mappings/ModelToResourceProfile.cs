@@ -9,13 +9,13 @@ namespace Kitchn.API.GraphQL.Mappings
 			CreateMap<Data.Models.Battery, GraphQL.Models.Batteries.Battery>();
 			CreateMap<Data.Models.Chore, GraphQL.Models.Chores.Chore>();
 			CreateMap<Data.Models.Location, GraphQL.Models.Locations.Location>();
-			CreateMap<Data.Models.Recipe, GraphQL.Models.Recipes.Recipe>();
-			CreateMap<Data.Models.RecipeInstruction, GraphQL.Models.RecipeInstructions.RecipeInstruction>();
-			CreateMap<Data.Models.RecipeCategory, GraphQL.Models.RecipeCategories.RecipeCategory>();
-			CreateMap<Data.Models.Measurement, GraphQL.Models.Measurements.Measurement>();
 			CreateMap<Data.Models.MeasurementConversion, GraphQL.Models.MeasurementConversions.MeasurementConversion>();
-			CreateMap<Data.Models.Product, GraphQL.Models.Products.Product>();
+			CreateMap<Data.Models.Measurement, GraphQL.Models.Measurements.Measurement>();
 			CreateMap<Data.Models.ProductBarcode, GraphQL.Models.ProductBarcodes.ProductBarcode>();
+			CreateMap<Data.Models.Product, GraphQL.Models.Products.Product>();
+			CreateMap<Data.Models.RecipeCategory, GraphQL.Models.RecipeCategories.RecipeCategory>();
+			CreateMap<Data.Models.RecipeInstruction, GraphQL.Models.RecipeInstructions.RecipeInstruction>();
+			CreateMap<Data.Models.Recipe, GraphQL.Models.Recipes.Recipe>();
 			CreateMap<Data.Models.StockedItem, GraphQL.Models.StockedItems.StockedItem>();
 		}
 	}
