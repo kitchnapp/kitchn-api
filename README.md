@@ -25,7 +25,14 @@ docker run -it --rm \
 
 ## Create a Migration
 
-Change the connection string in `KitchnDbContextFactory.cs` to the comparison database.
+You will need to install the EF dotnet command utilities globally using the following:
+
+```bash
+dotnet tool install -g dotnet-ef
+```
+
+Change the connection string in `KitchnDbContextFactory.cs` to the comparison database
+  and run the following:
 
 ```bash
 dotnet ef migrations add --project src/Kitchn.Data <Name>
