@@ -29,8 +29,8 @@ namespace Kitchn.API.GraphQL.Models
 						{
 							Id = product.Id,
 							Name = product.Name,
-							DefaultBestBefore = product.DefaultBestBeforeDateDifference,
-							DefaultConsumeWithin = product.DefaultConsumeWithinDays,
+							DefaultBestBefore = product.DefaultBestBefore,
+							DefaultConsumeWithin = product.DefaultConsumeWithin,
 							DefaultLocationId = product.DefaultLocationId
 						})
 						.FirstOrDefault();
@@ -63,8 +63,8 @@ namespace Kitchn.API.GraphQL.Models
 						{
 							Id = product.Id,
 							Name = product.Name,
-							DefaultBestBefore = product.DefaultBestBeforeDateDifference,
-							DefaultConsumeWithin = product.DefaultConsumeWithinDays,
+							DefaultBestBefore = product.DefaultBestBefore,
+							DefaultConsumeWithin = product.DefaultConsumeWithin,
 							DefaultLocationId = product.DefaultLocationId
 						});
 				}

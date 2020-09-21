@@ -455,9 +455,9 @@ namespace Kitchn.API.GraphQL.Models
 					{
 						Id = product.Id,
 						Name = product.Name,
-						DefaultBestBeforeDateDifference = product.DefaultBestBefore,
+						DefaultBestBefore = product.DefaultBestBefore,
 						DefaultLocationId = product.DefaultLocationId,
-						DefaultConsumeWithinDays = product.DefaultConsumeWithin
+						DefaultConsumeWithin = product.DefaultConsumeWithin
 					});
 					dbContext.SaveChanges();
 
@@ -486,9 +486,9 @@ namespace Kitchn.API.GraphQL.Models
 					}
 
 					dbProduct.Name = product.Name ?? dbProduct.Name;
-					dbProduct.DefaultBestBeforeDateDifference = product.DefaultBestBefore ?? dbProduct.DefaultBestBeforeDateDifference;
+					dbProduct.DefaultBestBefore = product.DefaultBestBefore ?? dbProduct.DefaultBestBefore;
 					dbProduct.DefaultLocationId = product.DefaultLocationId ?? dbProduct.DefaultLocationId;
-					dbProduct.DefaultConsumeWithinDays = product.DefaultConsumeWithin ?? dbProduct.DefaultConsumeWithinDays;
+					dbProduct.DefaultConsumeWithin = product.DefaultConsumeWithin ?? dbProduct.DefaultConsumeWithin;
 
 					dbContext.Products.Update(dbProduct);
 					dbContext.SaveChanges();
@@ -497,9 +497,9 @@ namespace Kitchn.API.GraphQL.Models
 					{
 						Id = dbProduct.Id,
 						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
+						DefaultBestBefore = dbProduct.DefaultBestBefore,
 						DefaultLocationId = dbProduct.DefaultLocationId,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin
 					};
 				}
 			);
@@ -529,9 +529,9 @@ namespace Kitchn.API.GraphQL.Models
 					{
 						Id = dbProduct.Id,
 						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
+						DefaultBestBefore = dbProduct.DefaultBestBefore,
 						DefaultLocationId = dbProduct.DefaultLocationId,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin
 					};
 				}
 			);
@@ -569,8 +569,8 @@ namespace Kitchn.API.GraphQL.Models
 					{
 						Id = dbProduct.Id,
 						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBeforeDateDifference,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithinDays,
+						DefaultBestBefore = dbProduct.DefaultBestBefore,
+						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin,
 						DefaultLocationId = dbProduct.DefaultLocationId
 					};
 				}

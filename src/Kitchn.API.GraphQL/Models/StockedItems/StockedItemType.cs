@@ -27,8 +27,8 @@ namespace Kitchn.API.GraphQL.Models.StockedItems
 						{
 							Id = product.Id,
 							Name = product.Name,
-							DefaultBestBefore = product.DefaultBestBeforeDateDifference,
-							DefaultConsumeWithin = product.DefaultConsumeWithinDays,
+							DefaultBestBefore = product.DefaultBestBefore,
+							DefaultConsumeWithin = product.DefaultConsumeWithin,
 							DefaultLocationId = product.DefaultLocationId
 						})
 						.FirstOrDefault();
