@@ -635,14 +635,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.StockedItems.Update(dbStockedItem);
 					dbContext.SaveChanges();
 
-					return new StockedItems.StockedItem
-					{
-						Id = dbStockedItem.Id,
-						ProductId = dbStockedItem.ProductId,
-						LocationId = dbStockedItem.LocationId,
-						ExpiryDate = dbStockedItem.ExpiryDate,
-						OpenedDate = dbStockedItem.OpenedDate
-					};
+					return mapper.Map<StockedItems.StockedItem>(dbStockedItem);
 				}
 			);
 
@@ -667,14 +660,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbStockedItem);
 					dbContext.SaveChanges();
 
-					return new StockedItems.StockedItem
-					{
-						Id = dbStockedItem.Id,
-						ProductId = dbStockedItem.ProductId,
-						LocationId = dbStockedItem.LocationId,
-						ExpiryDate = dbStockedItem.ExpiryDate,
-						OpenedDate = dbStockedItem.OpenedDate
-					};
+					return mapper.Map<StockedItems.StockedItem>(dbStockedItem);
 				}
 			);
 
