@@ -243,6 +243,17 @@ namespace Kitchn.API.GraphQL.Models
 					);
 				}
 			);
+
+			Field<ListGraphType<Batteries.BatteryType>>(
+				"batteries",
+				"Get a list of stocked batteries",
+				resolve: context =>
+				{
+					return mapper.Map<IEnumerable<Batteries.Battery>>(
+						dbContext.Batteries
+					);
+				}
+			);
 		}
 	}
 }
