@@ -23,17 +23,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					return dbContext.Products
-						.Where(q => q.Id == id)
-						.Select(product => new Products.Product
-						{
-							Id = product.Id,
-							Name = product.Name,
-							DefaultBestBefore = product.DefaultBestBefore,
-							DefaultConsumeWithin = product.DefaultConsumeWithin,
-							DefaultLocationId = product.DefaultLocationId
-						})
-						.FirstOrDefault();
+					return mapper.Map<Products.Product>(
+						dbContext.Products
+							.Where(q => q.Id == id)
+							.FirstOrDefault()
+					);
 				}
 			);
 
@@ -57,16 +51,10 @@ namespace Kitchn.API.GraphQL.Models
 							.Where(q => q.ProductBarcodes.Any(b => b.Barcode == barcode));
 					}
 
-					return baseQuery
-						.Where(q => search == null || EF.Functions.Like(q.Name, search))
-						.Select(product => new Products.Product
-						{
-							Id = product.Id,
-							Name = product.Name,
-							DefaultBestBefore = product.DefaultBestBefore,
-							DefaultConsumeWithin = product.DefaultConsumeWithin,
-							DefaultLocationId = product.DefaultLocationId
-						});
+					return mapper.Map<IEnumerable<Products.Product>>(
+						baseQuery
+							.Where(q => search == null || EF.Functions.Like(q.Name, search))
+					);
 				}
 			);
 
