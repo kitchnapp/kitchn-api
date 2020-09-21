@@ -493,14 +493,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Products.Update(dbProduct);
 					dbContext.SaveChanges();
 
-					return new Products.Product
-					{
-						Id = dbProduct.Id,
-						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBefore,
-						DefaultLocationId = dbProduct.DefaultLocationId,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin
-					};
+					return mapper.Map<Products.Product>(dbProduct);
 				}
 			);
 
@@ -525,14 +518,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbProduct);
 					dbContext.SaveChanges();
 
-					return new Products.Product
-					{
-						Id = dbProduct.Id,
-						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBefore,
-						DefaultLocationId = dbProduct.DefaultLocationId,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin
-					};
+					return mapper.Map<Products.Product>(dbProduct);
 				}
 			);
 
@@ -565,14 +551,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					dbContext.SaveChanges();
 
-					return new Products.Product
-					{
-						Id = dbProduct.Id,
-						Name = dbProduct.Name,
-						DefaultBestBefore = dbProduct.DefaultBestBefore,
-						DefaultConsumeWithin = dbProduct.DefaultConsumeWithin,
-						DefaultLocationId = dbProduct.DefaultLocationId
-					};
+					return mapper.Map<Products.Product>(dbProduct);
 				}
 			);
 
