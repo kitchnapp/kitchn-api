@@ -6,6 +6,7 @@ namespace Kitchn.API.GraphQL.Mappings
 	{
 		public ResourceToModelProfile()
 		{
+			CreateMap<GraphQL.Models.Batteries.Battery, Data.Models.Battery>();
 			CreateMap<GraphQL.Models.Chores.Chore, Data.Models.Chore>();
 			CreateMap<GraphQL.Models.Locations.Location, Data.Models.Location>();
 			CreateMap<GraphQL.Models.Recipes.Recipe, Data.Models.Recipe>();
