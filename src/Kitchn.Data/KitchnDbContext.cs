@@ -134,5 +134,10 @@ namespace Kitchn.Data
 		/// List of recipe instructions
 		/// </summary>
 		public DbSet<Models.RecipeInstruction> RecipeInstructions { get; set; }
+
+		/// <summary>
+		/// List of batteries
+		/// </summary>
+		public DbSet<Models.Battery> Batteries { get; set; }
 	}
 }

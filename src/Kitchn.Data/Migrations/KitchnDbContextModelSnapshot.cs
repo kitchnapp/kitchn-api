@@ -19,6 +19,35 @@ namespace Kitchn.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("Kitchn.Data.Models.Battery", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("LastCharged")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("Rechargeable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Batteries");
+                });
+
             modelBuilder.Entity("Kitchn.Data.Models.Chore", b =>
                 {
                     b.Property<Guid>("Id")
