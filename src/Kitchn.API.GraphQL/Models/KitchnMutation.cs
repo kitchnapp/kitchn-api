@@ -316,11 +316,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.Remove(dbRecipeCategory);
 					dbContext.SaveChanges();
 
-					return new RecipeCategories.RecipeCategory
-					{
-						Id = dbRecipeCategory.Id,
-						Name = dbRecipeCategory.Name
-					};
+					return mapper.Map<RecipeCategories.RecipeCategory>(dbRecipeCategory);
 				}
 			);
 
