@@ -31,12 +31,12 @@ namespace Kitchn.Data.Models
 		/// <summary>
 		/// Default consume within days of "opening" this item
 		/// </summary>
-		public TimeSpan? DefaultConsumeWithinDays { get; set; }
+		public TimeSpan? DefaultConsumeWithin { get; set; }
 
 		/// <summary>
 		/// Default best-before difference to pre-fill upon adding
 		/// </summary>
-		public TimeSpan? DefaultBestBeforeDateDifference { get; set; }
+		public TimeSpan? DefaultBestBefore { get; set; }
 
 		/// <summary>
 		/// Barcodes of this product
