@@ -639,6 +639,91 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
+			Field<Batteries.BatteryType>(
+				"createBattery",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<Batteries.BatteryInputType>> { Name = "battery" }
+				),
+				resolve: context =>
+				{
+					var battery = context.GetArgument<Batteries.Battery>("battery");
+
+					battery.Id = Guid.NewGuid();
+
+					dbContext.Batteries.Add(new Kitchn.Data.Models.Battery
+					{
+						Id = battery.Id,
+						Name = battery.Name,
+						LastCharged = battery.LastCharged,
+						Location = battery.Location,
+						Rechargeable = battery.Rechargeable,
+						ExpiryDate = battery.ExpiryDate,
+						Type = battery.Type
+					});
+					dbContext.SaveChanges();
+
+					return battery;
+				}
+			);
+
+			Field<Batteries.BatteryType>(
+				"updateBattery",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<NonNullGraphType<Batteries.BatteryInputType>> { Name = "battery" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var battery = context.GetArgument<Batteries.Battery>("battery");
+
+					var dbBattery = dbContext.Batteries
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbBattery == null)
+					{
+						return null;
+					}
+
+					dbBattery.Name = battery.Name ?? dbBattery.Name;
+					dbBattery.Location = battery.Location ?? dbBattery.Location;
+					dbBattery.ExpiryDate = battery.ExpiryDate ?? dbBattery.ExpiryDate;
+					dbBattery.LastCharged = battery.LastCharged ?? dbBattery.LastCharged;
+					dbBattery.Rechargeable = battery.Rechargeable ?? dbBattery.Rechargeable;
+					dbBattery.Type = battery.Type ?? dbBattery.Type;
+
+					dbContext.Batteries.Update(dbBattery);
+					dbContext.SaveChanges();
+
+					return mapper.Map<Batteries.Battery>(dbBattery);
+				}
+			);
+
+			Field<Batteries.BatteryType>(
+				"deleteBattery",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+
+					var dbBattery = dbContext.Batteries
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbBattery == null)
+					{
+						return null;
+					}
+
+					dbContext.Remove(dbBattery);
+					dbContext.SaveChanges();
+
+					return mapper.Map<Batteries.Battery>(dbBattery);
+				}
+			);
 		}
 	}
 }
