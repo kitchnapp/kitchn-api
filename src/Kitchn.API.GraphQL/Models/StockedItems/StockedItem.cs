@@ -9,5 +9,6 @@ namespace Kitchn.API.GraphQL.Models.StockedItems
 		public Guid? LocationId { get; set; }
 		public DateTime? ExpiryDate { get; set; }
 		public DateTime? OpenedDate { get; set; }
+		public int? ConsumedCount { get; set; }
 	}
 }

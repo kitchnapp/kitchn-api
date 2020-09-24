@@ -14,7 +14,7 @@ namespace Kitchn.API.GraphQL.Models.StockedItems
 			Description = "An item in stock.";
 
 			Field(x => x.Id).Description("The ID of the stocked item.");
-
+			Field<IntGraphType>("consumedCount", "The amount of times this item has been consumed.");
 			Field<TimeSpanSecondsGraphType>("expiryDate", "The expiry date for the stocked item.");
 			Field<TimeSpanSecondsGraphType>("openedDate", "The date the stocked item was opened.");
 
