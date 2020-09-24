@@ -16,7 +16,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 
 			Field(x => x.Id).Description("The ID of the product.");
 			Field(x => x.Name).Description("The name of the product.");
-			Field(x => x.ConsumeFactor).Description("The consume factor of the product.");
+			Field<IntGraphType>("consumeFactor", "The consume factor of the product.");
 			Field<TimeSpanSecondsGraphType>("defaultBestBefore", "The default best before window for the product.");
 			Field<TimeSpanSecondsGraphType>("defaultConsumeWithin", "The default consuming window for the product.");
 
