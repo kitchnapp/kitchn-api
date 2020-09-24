@@ -41,5 +41,10 @@ namespace Kitchn.Data.Models
 		/// Day this stocked item was opened. If this value is not null, it is considered open.
 		/// </summary>
 		public DateTime? OpenedDate { get; set; }
+
+		/// <summary>
+		/// Amount of times this stocked item has been consumed.
+		/// </summary>
+		public int? ConsumedCount { get; set; }
 	}
 }
