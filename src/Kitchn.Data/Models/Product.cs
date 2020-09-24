@@ -47,5 +47,10 @@ namespace Kitchn.Data.Models
 		/// Stocked items of this product
 		/// </summary>
 		public List<StockedItem> StockedItems { get; set; }
+
+		/// <summary>
+		/// A factor that allows products to be consumed at 1/[factor] each time
+		/// </summary>
+		public int? ConsumeFactor { get; set; }
 	}
 }
