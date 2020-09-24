@@ -4,3 +4,10 @@ items:
 
   - id: 31B912CC-B3E1-48DA-A5F3-A402C56ECD25
     name: Black Pepper
+
+  - id: 6299EC40-A19B-4FEB-9B4B-BB0C805D5DCD
+    name: Milk (2 Pints)
+    consumeFactor: 2
+    defaultLocationId: 34AEF97C-1B6B-4C5E-A33B-38739515DE70
+    defaultConsumeWithin: 3
+    defaultBestBefore: 7
