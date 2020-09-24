@@ -9,5 +9,6 @@ namespace Kitchn.API.GraphQL.Models.Products
 		public Guid? DefaultLocationId { get; set; }
 		public TimeSpan? DefaultConsumeWithin { get; set; }
 		public TimeSpan? DefaultBestBefore { get; set; }
+		public int? ConsumeFactor { get; set; }
 	}
 }
