@@ -7,7 +7,7 @@ items:
 
   - id: 6299EC40-A19B-4FEB-9B4B-BB0C805D5DCD
     name: Milk (2 Pints)
-    consumeFactor: 2
+    consumeFactor: 4
     defaultLocationId: 34AEF97C-1B6B-4C5E-A33B-38739515DE70
-    defaultConsumeWithin: 3
+    defaultConsumeWithin: 4
     defaultBestBefore: 7
