@@ -724,6 +724,44 @@ namespace Kitchn.API.GraphQL.Models
 					return mapper.Map<Batteries.Battery>(dbBattery);
 				}
 			);
+
+			Field<StockedItems.StockedItemType>(
+				"consumeStockedItem",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id" },
+					new QueryArgument<IntGraphType> { Name = "partialCount" }
+				),
+				resolve: context =>
+				{
+					var id = context.GetArgument<Guid>("id");
+					var partialConsumingCount = context.GetArgument<int?>("partialCount");
+
+					var dbStockedItem = dbContext.StockedItems
+						.Include(o => o.Product)
+						.Where(q => q.Id == id)
+						.FirstOrDefault();
+
+					if (dbStockedItem == null)
+					{
+						return null;
+					}
+
+					var consumed = true;
+					if (partialConsumingCount.HasValue)
+					{
+						dbStockedItem.ConsumedCount = dbStockedItem.ConsumedCount.GetValueOrDefault(0) + partialConsumingCount;
+						if (dbStockedItem.ConsumedCount < dbStockedItem.Product.ConsumeFactor.GetValueOrDefault(1))
+							consumed = false;
+					}
+
+					if (consumed)
+						dbContext.Remove(dbStockedItem);
+
+					dbContext.SaveChanges();
+
+					return mapper.Map<StockedItems.StockedItem>(dbStockedItem);
+				}
+			);
 		}
 	}
 }
