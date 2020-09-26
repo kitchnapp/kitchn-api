@@ -19,16 +19,10 @@ namespace Kitchn.API.GraphQL.Models.Measurements
 			Field(x => x.MultipleName, nullable: true).Description("The multiple word of the measurement.");
 
 			Field<ListGraphType<MeasurementConversions.MeasurementConversionType>>("conversions", "The list of possible conversions.",
-				arguments: new QueryArguments(
-					new QueryArgument<StringGraphType> { Name = "search" }
-				),
 				resolve: context =>
 				{
-					var search = context.GetArgument<string>("search");
-
 					return dbContext.MeasurementConversions
 						.Include(o => o.ToMeasurement)
-						.Where(o => search == null || EF.Functions.Like(o.ToMeasurement.Name, search))
 						.Where(o =>
 							(o.FromMeasurementId == context.Source.Id) ||
 							(o.ToMeasurementId == context.Source.Id)
