@@ -23,11 +23,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					location.Id = Guid.NewGuid();
 
-					dbContext.Locations.Add(new Kitchn.Data.Models.Location
-					{
-						Id = location.Id,
-						Name = location.Name
-					});
+					dbContext.Locations.Add(mapper.Map<Data.Models.Location>(location));
 					dbContext.SaveChanges();
 
 					return location;
