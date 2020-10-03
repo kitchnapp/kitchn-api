@@ -32,7 +32,7 @@ namespace Kitchn.API.GraphQL.Models.Measurements
 
 			Field<MeasurementConversions.MeasurementConversionType>("convert", "Convert to a specific ID.",
 				arguments: new QueryArguments(
-					new QueryArgument<IdGraphType> { Name = "toMeasurementId" }
+					new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "toMeasurementId" }
 				),
 				resolve: context =>
 				{
