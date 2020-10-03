@@ -31,7 +31,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Products.ProductType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Products.ProductType>>>>(
 				"products",
 				"Get product by search",
 				arguments: new QueryArguments(
@@ -76,7 +76,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Locations.LocationType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Locations.LocationType>>>>(
 				"locations",
 				"Get a list of locations",
 				arguments: new QueryArguments(
@@ -93,7 +93,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Measurements.MeasurementType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Measurements.MeasurementType>>>>(
 				"measurements",
 				"Get a list of measurements",
 				arguments: new QueryArguments(
@@ -128,7 +128,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Chores.ChoreType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Chores.ChoreType>>>>(
 				"chores",
 				"Get a list of chores",
 				arguments: new QueryArguments(
@@ -163,7 +163,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Recipes.RecipeType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Recipes.RecipeType>>>>(
 				"recipes",
 				"Get a list of recipes",
 				arguments: new QueryArguments(
@@ -216,7 +216,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<RecipeCategories.RecipeCategoryType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<RecipeCategories.RecipeCategoryType>>>>(
 				"recipeCategories",
 				"Get a list of recipe categories",
 				arguments: new QueryArguments(
@@ -233,7 +233,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<StockedItems.StockedItemType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<StockedItems.StockedItemType>>>>(
 				"stockedItems",
 				"Get a list of stocked items",
 				resolve: context =>
@@ -244,7 +244,7 @@ namespace Kitchn.API.GraphQL.Models
 				}
 			);
 
-			Field<ListGraphType<Batteries.BatteryType>>(
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Batteries.BatteryType>>>>(
 				"batteries",
 				"Get a list of stocked batteries",
 				resolve: context =>
