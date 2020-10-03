@@ -19,17 +19,11 @@ namespace Kitchn.API.GraphQL.Models.RecipeCategories
 			Field(x => x.Name).Description("The name of the recipe category.");
 
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.Recipes.RecipeType>>>>("recipes", "The recipes in this category.",
-				arguments: new QueryArguments(
-					new QueryArgument<StringGraphType> { Name = "search" }
-				),
 				resolve: context =>
 				{
-					var search = context.GetArgument<string>("search");
-
 					return mapper.Map<IEnumerable<Recipes.Recipe>>(
 						dbContext.Recipes
 							.Include(q => q.Categories)
-							.Where(q => q.Name.Contains(search) || search == null)
 							.Where(q => q.Categories.Where(q => q.RecipeCategoryId == context.Source.Id).Any())
 					);
 				}
