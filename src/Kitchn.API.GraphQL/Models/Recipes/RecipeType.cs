@@ -20,7 +20,7 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 			Field(x => x.Description).Description("The description of the recipe.");
 			Field<IntGraphType>("rating", "The rating of the recipe.");
 
-			Field<ListGraphType<RecipeCategories.RecipeCategoryType>>("categories", "The categories of the recipe.",
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<RecipeCategories.RecipeCategoryType>>>>("categories", "The categories of the recipe.",
 				resolve: context =>
 				{
 					return mapper.Map<RecipeCategories.RecipeCategory>(
@@ -33,7 +33,7 @@ namespace Kitchn.API.GraphQL.Models.Recipes
 				}
 			);
 
-			Field<ListGraphType<RecipeInstructions.RecipeInstructionType>>("instructions", "The instructions of the recipe.",
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<RecipeInstructions.RecipeInstructionType>>>>("instructions", "The instructions of the recipe.",
 				resolve: context =>
 				{
 					return mapper.Map<IEnumerable<RecipeInstructions.RecipeInstruction>>(
