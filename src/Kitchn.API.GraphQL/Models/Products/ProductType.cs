@@ -31,7 +31,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 				}
 			);
 
-			Field<ListGraphType<Models.ProductBarcodes.ProductBarcodeType>>("barcodes", "The barcodes for the product.",
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.ProductBarcodes.ProductBarcodeType>>>>("barcodes", "The barcodes for the product.",
 				resolve: context =>
 				{
 					return mapper.Map<IEnumerable<ProductBarcodes.ProductBarcode>>(
