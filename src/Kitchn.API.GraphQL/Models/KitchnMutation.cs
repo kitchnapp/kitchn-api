@@ -449,7 +449,8 @@ namespace Kitchn.API.GraphQL.Models
 						Name = product.Name,
 						DefaultBestBefore = product.DefaultBestBefore,
 						DefaultLocationId = product.DefaultLocationId,
-						DefaultConsumeWithin = product.DefaultConsumeWithin
+						DefaultConsumeWithin = product.DefaultConsumeWithin,
+						ConsumeFactor = product.ConsumeFactor
 					});
 					dbContext.SaveChanges();
 
@@ -481,6 +482,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbProduct.DefaultBestBefore = product.DefaultBestBefore ?? dbProduct.DefaultBestBefore;
 					dbProduct.DefaultLocationId = product.DefaultLocationId ?? dbProduct.DefaultLocationId;
 					dbProduct.DefaultConsumeWithin = product.DefaultConsumeWithin ?? dbProduct.DefaultConsumeWithin;
+					dbProduct.ConsumeFactor = product.ConsumeFactor ?? dbProduct.ConsumeFactor;
 
 					dbContext.Products.Update(dbProduct);
 					dbContext.SaveChanges();
