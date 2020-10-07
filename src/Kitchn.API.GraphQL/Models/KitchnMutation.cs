@@ -572,7 +572,8 @@ namespace Kitchn.API.GraphQL.Models
 						ProductId = stockeditem.ProductId.Value,
 						LocationId = stockeditem.LocationId,
 						ExpiryDate = stockeditem.ExpiryDate,
-						OpenedDate = stockeditem.OpenedDate
+						OpenedDate = stockeditem.OpenedDate,
+						ConsumedCount = stockeditem.ConsumedCount
 					});
 					dbContext.SaveChanges();
 
@@ -604,6 +605,7 @@ namespace Kitchn.API.GraphQL.Models
 					dbStockedItem.LocationId = stockeditem.LocationId ?? dbStockedItem.LocationId;
 					dbStockedItem.ExpiryDate = stockeditem.ExpiryDate ?? dbStockedItem.ExpiryDate;
 					dbStockedItem.OpenedDate = stockeditem.OpenedDate ?? dbStockedItem.OpenedDate;
+					dbStockedItem.ConsumedCount = stockeditem.ConsumedCount ?? dbStockedItem.ConsumedCount;
 
 					dbContext.StockedItems.Update(dbStockedItem);
 					dbContext.SaveChanges();
