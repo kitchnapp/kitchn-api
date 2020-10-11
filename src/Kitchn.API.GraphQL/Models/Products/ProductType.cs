@@ -31,6 +31,16 @@ namespace Kitchn.API.GraphQL.Models.Products
 				}
 			);
 
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.StockedItems.StockedItemType>>>>("stockedItems", "The stocked items of the product.",
+				resolve: context =>
+				{
+					return mapper.Map<StockedItems.StockedItem>(
+						dbContext.StockedItems
+							.Where(q => q.ProductId == context.Source.Id)
+					);
+				}
+			);
+
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.ProductBarcodes.ProductBarcodeType>>>>("barcodes", "The barcodes for the product.",
 				resolve: context =>
 				{
