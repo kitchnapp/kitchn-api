@@ -96,11 +96,6 @@ namespace Kitchn.Data
 		public DbSet<Models.ProductBarcode> ProductBarcodes { get; set; }
 
 		/// <summary>
-		/// List of products
-		/// </summary>
-		public DbSet<Models.ProductMeasurement> ProductMeasurements { get; set; }
-
-		/// <summary>
 		/// List of measurements
 		/// </summary>
 		public DbSet<Models.Measurement> Measurements { get; set; }
