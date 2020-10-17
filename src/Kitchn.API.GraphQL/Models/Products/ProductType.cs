@@ -20,7 +20,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<TimeSpanSecondsGraphType>("defaultBestBefore", "The default best before window for the product.");
 			Field<TimeSpanSecondsGraphType>("defaultConsumeWithin", "The default consuming window for the product.");
 
-			Field<Models.Locations.LocationType>("defaultLocation", "The default location for the product.",
+			Field<Locations.LocationType>("defaultLocation", "The default location for the product.",
 				resolve: context =>
 				{
 					return mapper.Map<Locations.Location>(
@@ -31,7 +31,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 				}
 			);
 
-			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.StockedItems.StockedItemType>>>>("stockedItems", "The stocked items of the product.",
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<StockedItems.StockedItemType>>>>("stockedItems", "The stocked items of the product.",
 				resolve: context =>
 				{
 					return mapper.Map<StockedItems.StockedItem>(
@@ -41,7 +41,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 				}
 			);
 
-			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.ProductBarcodes.ProductBarcodeType>>>>("barcodes", "The barcodes for the product.",
+			Field<NonNullGraphType<ListGraphType<NonNullGraphType<ProductBarcodes.ProductBarcodeType>>>>("barcodes", "The barcodes for the product.",
 				resolve: context =>
 				{
 					return mapper.Map<IEnumerable<ProductBarcodes.ProductBarcode>>(
