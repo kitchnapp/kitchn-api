@@ -50,6 +50,26 @@ namespace Kitchn.API.GraphQL.Models.Products
 					);
 				}
 			);
+
+			Field<Measurements.MeasurementType>("individualMeasurement", "The individual measurement for the product.",
+				resolve: context =>
+				{
+					return mapper.Map<Measurements.Measurement>(
+						dbContext.Measurements
+							.FirstOrDefault(q => q.Id == context.Source.IndividualMeasurementId)
+					);
+				}
+			);
+
+			Field<Measurements.MeasurementType>("groupMeasurement", "The group measurement for the product.",
+				resolve: context =>
+				{
+					return mapper.Map<Measurements.Measurement>(
+						dbContext.Measurements
+							.FirstOrDefault(q => q.Id == context.Source.GroupMeasurementId)
+					);
+				}
+			);
 		}
 	}
 }
