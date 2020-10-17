@@ -34,7 +34,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<StockedItems.StockedItemType>>>>("stockedItems", "The stocked items of the product.",
 				resolve: context =>
 				{
-					return mapper.Map<StockedItems.StockedItem>(
+					return mapper.Map<IEnumerable<StockedItems.StockedItem>>(
 						dbContext.StockedItems
 							.Where(q => q.ProductId == context.Source.Id)
 					);
