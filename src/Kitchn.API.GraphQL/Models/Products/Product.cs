@@ -10,5 +10,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 		public TimeSpan? DefaultConsumeWithin { get; set; }
 		public TimeSpan? DefaultBestBefore { get; set; }
 		public int? ConsumeFactor { get; set; }
+		public Guid? IndividualMeasurementId { get; set; }
+		public Guid? GroupMeasurementId { get; set; }
 	}
 }
