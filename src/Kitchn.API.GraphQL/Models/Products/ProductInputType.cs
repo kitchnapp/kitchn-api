@@ -14,6 +14,8 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<IntGraphType>("consumeFactor", "The consuming factor of the product.");
 			Field<TimeSpanSecondsGraphType>("defaultBestBefore", description: "The default best before in seconds.");
 			Field<TimeSpanSecondsGraphType>("defaultConsumeWithin", description: "The default consume within in seconds.");
+			Field<IdGraphType>("individualMeasurementId", description: "The individual measurement ID for the product.");
+			Field<IdGraphType>("groupMeasurementId", description: "The group measurement ID for the product.");
 		}
 	}
 }
