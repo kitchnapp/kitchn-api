@@ -16,7 +16,11 @@ namespace Kitchn.API.GraphQL.Models.Measurements
 
 			Field(x => x.Id).Description("The ID of the measurement.");
 			Field(x => x.Name).Description("The name of the measurement.");
-			Field(x => x.MultipleName, nullable: true).Description("The multiple word of the measurement.");
+			Field<StringGraphType>("multipleName", "The multiple word of the measurement.",
+				resolve: context =>
+				{
+					return context.Source.MultipleName ?? context.Source.Name + "s";
+				});
 
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<MeasurementConversions.MeasurementConversionType>>>>("conversions", "The list of possible conversions.",
 				resolve: context =>
