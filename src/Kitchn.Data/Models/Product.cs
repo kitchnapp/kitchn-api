@@ -52,5 +52,26 @@ namespace Kitchn.Data.Models
 		/// A factor that allows products to be consumed at 1/[factor] each time
 		/// </summary>
 		public int? ConsumeFactor { get; set; }
+
+		/// <summary>
+		/// Individual measurement ID of this product
+		/// </summary>
+		public Guid? IndividualMeasurementId { get; set; }
+
+		/// <summary>
+		/// Navigation property for the individual measurement
+		/// </summary>
+		public Measurement IndividualMeasurement { get; set; }
+
+		/// <summary>
+		/// Group measurement ID of this product
+		/// For example, 8 rashers of bacon becomes a pack
+		/// </summary>
+		public Guid? GroupMeasurementId { get; set; }
+
+		/// <summary>
+		/// Navigation property for the group measurement
+		/// </summary>
+		public Measurement GroupMeasurement { get; set; }
 	}
 }
