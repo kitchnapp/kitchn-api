@@ -11,7 +11,7 @@ namespace Kitchn.API.GraphQL.Tests
 		[JsonProperty("query")]
 		public string Query { get; set; }
 
-		public StringContent GetRequest()
+		private StringContent GetRequest()
 		{
 			var jsonQuery = JsonConvert.SerializeObject(this);
 			var stringContent = new StringContent(jsonQuery, Encoding.UTF8, "application/json");
