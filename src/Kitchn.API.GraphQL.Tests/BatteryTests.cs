@@ -23,17 +23,10 @@ namespace Kitchn.API.GraphQL.Tests
 		{
 			var client = _factory.CreateClient();
 
-			var graphQLQuery = new
+			var gqlResponse = await new GraphQLRequest
 			{
-				query = "{batteries{id name}}"
-			};
-
-			var jsonQuery = JsonConvert.SerializeObject(graphQLQuery);
-			var stringContent = new StringContent(jsonQuery, Encoding.UTF8, "application/json");
-
-			var response = await client.PostAsync("/graphql", stringContent);
-
-			var gqlResponse = JObject.Parse(await response.Content.ReadAsStringAsync())["data"];
+				Query = "{batteries{id name}}"
+			}.Send(client);
 
 			var batteries = gqlResponse["batteries"] as JArray;
 
