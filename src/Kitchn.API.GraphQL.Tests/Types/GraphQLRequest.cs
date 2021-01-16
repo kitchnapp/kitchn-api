@@ -1,15 +1,19 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Kitchn.API.GraphQL.Tests.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Kitchn.API.GraphQL.Tests
+namespace Kitchn.API.GraphQL.Tests.Types
 {
 	public class GraphQLRequest
 	{
 		[JsonProperty("query")]
 		public string Query { get; set; }
+
+		[JsonProperty("variables")]
+		public object Variables { get; set; }
 
 		private StringContent GetRequest()
 		{
@@ -19,11 +23,11 @@ namespace Kitchn.API.GraphQL.Tests
 			return stringContent;
 		}
 
-		public async Task<JToken> Send(HttpClient client)
+		public async Task<GraphQLResponse> Send(HttpClient client)
 		{
 			var response = await client.PostAsync("/graphql", GetRequest());
 
-			var gqlResponse = JObject.Parse(await response.Content.ReadAsStringAsync())["data"];
+			var gqlResponse = JsonConvert.DeserializeObject<GraphQLResponse>(await response.Content.ReadAsStringAsync());
 
 			return gqlResponse;
 		}
