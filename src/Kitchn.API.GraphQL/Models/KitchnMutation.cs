@@ -648,18 +648,14 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var battery = context.GetArgument<Batteries.Battery>("battery");
 
+					if (string.IsNullOrEmpty(battery.Name))
+						throw new Exception("Battery name cannot be null");
+
 					battery.Id = Guid.NewGuid();
 
-					dbContext.Batteries.Add(new Kitchn.Data.Models.Battery
-					{
-						Id = battery.Id,
-						Name = battery.Name,
-						LastCharged = battery.LastCharged,
-						Location = battery.Location,
-						Rechargeable = battery.Rechargeable,
-						ExpiryDate = battery.ExpiryDate,
-						Type = battery.Type
-					});
+					var dbBattery = mapper.Map<Kitchn.Data.Models.Battery>(battery);
+
+					dbContext.Batteries.Add(dbBattery);
 					dbContext.SaveChanges();
 
 					return battery;
@@ -682,21 +678,14 @@ namespace Kitchn.API.GraphQL.Models
 						.FirstOrDefault();
 
 					if (dbBattery == null)
-					{
-						return null;
-					}
+						throw new Exception("Battery doesn't exist");
 
-					dbBattery.Name = battery.Name ?? dbBattery.Name;
-					dbBattery.Location = battery.Location ?? dbBattery.Location;
-					dbBattery.ExpiryDate = battery.ExpiryDate ?? dbBattery.ExpiryDate;
-					dbBattery.LastCharged = battery.LastCharged ?? dbBattery.LastCharged;
-					dbBattery.Rechargeable = battery.Rechargeable ?? dbBattery.Rechargeable;
-					dbBattery.Type = battery.Type ?? dbBattery.Type;
+					var updatedDbBattery = mapper.Map<Batteries.Battery, Data.Models.Battery>(battery, dbBattery);
 
-					dbContext.Batteries.Update(dbBattery);
+					dbContext.Batteries.Update(updatedDbBattery);
 					dbContext.SaveChanges();
 
-					return mapper.Map<Batteries.Battery>(dbBattery);
+					return mapper.Map<Batteries.Battery>(updatedDbBattery);
 				}
 			);
 
@@ -714,9 +703,7 @@ namespace Kitchn.API.GraphQL.Models
 						.FirstOrDefault();
 
 					if (dbBattery == null)
-					{
-						return null;
-					}
+						throw new Exception("Not found");
 
 					dbContext.Remove(dbBattery);
 					dbContext.SaveChanges();
