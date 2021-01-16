@@ -97,19 +97,6 @@ namespace Kitchn.API.GraphQL
 
 			// use graphql-playground middleware at default url /ui/voyager
 			app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
-
-			var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
-			optionsBuilder.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"]);
-
-			ApplyMigrations(new KitchnDbContext(optionsBuilder.Options));
-		}
-
-		public void ApplyMigrations(KitchnDbContext context)
-		{
-			if (context.Database.GetPendingMigrations().Any())
-			{
-				context.Database.Migrate();
-			}
 		}
 	}
 }
