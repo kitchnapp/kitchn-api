@@ -20,7 +20,7 @@ namespace Kitchn.API.GraphQL.Tests
 		}
 
 		[Fact]
-		public async Task GetBatteries_Empty()
+		public async Task GetBatteries_ReturnsEmptyList()
 		{
 			var client = _factory.CreateClient();
 
@@ -37,7 +37,7 @@ namespace Kitchn.API.GraphQL.Tests
 		}
 
 		[Fact]
-		public async Task DeleteBattery_NotExist()
+		public async Task DeleteBattery_ThrowsException()
 		{
 			var client = _factory.CreateClient();
 
@@ -51,7 +51,7 @@ namespace Kitchn.API.GraphQL.Tests
 		}
 
 		[Fact]
-		public async Task UpdateBattery_NotExist()
+		public async Task UpdateBattery_ThrowsException()
 		{
 			var client = _factory.CreateClient();
 
@@ -72,7 +72,7 @@ namespace Kitchn.API.GraphQL.Tests
 		}
 
 		[Fact]
-		public async Task CreateBattery()
+		public async Task CreateBattery_ReturnsBattery()
 		{
 			var client = _factory.CreateClient();
 
