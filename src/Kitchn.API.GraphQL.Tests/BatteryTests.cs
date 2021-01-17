@@ -88,7 +88,7 @@ namespace Kitchn.API.GraphQL.Tests
 				}
 			}.Send(client);
 
-			Assert.NotNull(gqlResponse.Data["battery"]);
+			Assert.NotNull(gqlResponse.Data["battery"].ToObject<object>());
 			Assert.Null(gqlResponse.Errors);
 		}
 	}
