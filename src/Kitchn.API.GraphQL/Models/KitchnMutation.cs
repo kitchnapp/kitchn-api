@@ -680,6 +680,8 @@ namespace Kitchn.API.GraphQL.Models
 					if (dbBattery == null)
 						throw new Exception("Battery doesn't exist");
 
+					battery.Id = id;
+
 					var updatedDbBattery = mapper.Map<Batteries.Battery, Data.Models.Battery>(battery, dbBattery);
 
 					dbContext.Batteries.Update(updatedDbBattery);

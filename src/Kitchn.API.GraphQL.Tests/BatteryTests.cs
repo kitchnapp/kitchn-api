@@ -80,7 +80,7 @@ namespace Kitchn.API.GraphQL.Tests
 		}
 
 		[Fact]
-		public async Task UpdateBattery_ReturnsBattery()
+		public async Task UpdateBattery_ChangeName_ReturnsBattery()
 		{
 			var client = _factory.CreateClient();
 
@@ -104,7 +104,7 @@ namespace Kitchn.API.GraphQL.Tests
 
 			var updateBatteryResponse = await new GraphQLRequest
 			{
-				Query = "mutation($battery:BatteryInput!){battery:updateBattery(id:\"" + batteryId + "\",battery:$battery){id}}",
+				Query = "mutation($battery:BatteryInput!){battery:updateBattery(id:\"" + batteryId + "\",battery:$battery){id name}}",
 				Variables = new
 				{
 					battery = new
