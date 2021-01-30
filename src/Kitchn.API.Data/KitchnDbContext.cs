@@ -1,5 +1,6 @@
 using Kitchn.API.Data.Models;
 using Kitchn.API.Data.Seeds;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.Data
@@ -7,7 +8,7 @@ namespace Kitchn.API.Data
 	/// <summary>
 	/// Kitchn Database Context via EF Core
 	/// </summary>
-	public class KitchnDbContext : DbContext
+	public class KitchnDbContext : IdentityDbContext
 	{
 		/// <summary>
 		/// Add option to seed data on model create
@@ -33,6 +34,8 @@ namespace Kitchn.API.Data
 		/// </summary>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			base.OnModelCreating(modelBuilder);
+
 			modelBuilder.Entity<RecipeCategoryRecipe>()
 				.HasKey(t => new { t.RecipeId, t.RecipeCategoryId });
 

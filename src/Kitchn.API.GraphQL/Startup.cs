@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace Kitchn.API.GraphQL
 {
@@ -56,6 +57,13 @@ namespace Kitchn.API.GraphQL
 				options.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"])
 			);
 
+			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddEntityFrameworkStores<KitchnDbContext>()
+				.AddDefaultTokenProviders();
+
+			services.AddAuthentication();
+			services.AddAuthorization();
+
 			services.AddScoped<KitchnQuery>();
 			services.AddScoped<KitchnMutation>();
 			services.AddScoped<KitchnSchema>();
@@ -84,6 +92,9 @@ namespace Kitchn.API.GraphQL
 			}
 
 			app.UseCors(Configuration["Cors:Policy"]);
+
+			app.UseAuthorization();
+			app.UseAuthentication();
 
 			app.UseWebSockets();
 
