@@ -22,6 +22,12 @@ services:
       #   `Cors__Origins` will be allowed to access the Kitchn API resource.
       Cors__Policy: AllowAll
       Cors__Origins: "http://localhost;https://localhost"
+      # GraphQL debugging endpoints
+      #   Values can be "true" or "false"
+      GraphQL__Playground: "true"
+      GraphQL__Altair: "true"
+      GraphQL__Voyager: "true"
+
     ports:
       # By default, only exposes the non-SSL API interface.
       - 80:80

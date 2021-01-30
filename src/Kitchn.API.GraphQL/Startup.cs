@@ -89,14 +89,23 @@ namespace Kitchn.API.GraphQL
 
 			app.UseGraphQL<KitchnSchema>("/graphql");
 
-			// use altair middleware at default url /ui/altair
-			app.UseGraphQLAltair(new GraphQLAltairOptions());
+			if (Configuration.GetValue<bool>("GraphQL:Altair"))
+			{
+				// use altair middleware at default url /ui/altair
+				app.UseGraphQLAltair(new GraphQLAltairOptions());
+			}
 
-			// use graphql-playground middleware at default url /ui/playground
-			app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+			if (Configuration.GetValue<bool>("GraphQL:Playground"))
+			{
+				// use graphql-playground middleware at default url /ui/playground
+				app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+			}
 
-			// use graphql-playground middleware at default url /ui/voyager
-			app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+			if (Configuration.GetValue<bool>("GraphQL:Voyager"))
+			{
+				// use graphql-playground middleware at default url /ui/voyager
+				app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+			}
 		}
 	}
 }
