@@ -28,7 +28,7 @@ namespace Kitchn.API.GraphQL.Tests.Fixtures
 
 				services.AddDbContext<KitchnDbContext>((options, context) =>
 				{
-					context.UseInMemoryDatabase(Guid.NewGuid().ToString());
+					context.UseInMemoryDatabase("KitchnTestDb");
 				});
 			});
 		}
