@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchn.Data", "Kitchn.Data\Kitchn.Data.csproj", "{45B069F6-67B6-4B91-A828-F96D9B510299}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchn.API.Data", "Kitchn.API.Data\Kitchn.API.Data.csproj", "{45B069F6-67B6-4B91-A828-F96D9B510299}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchn.API.GraphQL", "Kitchn.API.GraphQL\Kitchn.API.GraphQL.csproj", "{F8A0BE45-04E8-4151-BC7F-520B724EA219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchn.API.GraphQL", "Kitchn.API.GraphQL\Kitchn.API.GraphQL.csproj", "{F8A0BE45-04E8-4151-BC7F-520B724EA219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchn.API.GraphQL.Tests", "Kitchn.API.GraphQL.Tests\Kitchn.API.GraphQL.Tests.csproj", "{ABA74929-F1AA-43FB-A9A6-3A5B3A4CEEC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchn.API.GraphQL.Tests", "Kitchn.API.GraphQL.Tests\Kitchn.API.GraphQL.Tests.csproj", "{ABA74929-F1AA-43FB-A9A6-3A5B3A4CEEC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{45B069F6-67B6-4B91-A828-F96D9B510299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +55,11 @@ Global
 		{ABA74929-F1AA-43FB-A9A6-3A5B3A4CEEC6}.Release|x64.Build.0 = Release|Any CPU
 		{ABA74929-F1AA-43FB-A9A6-3A5B3A4CEEC6}.Release|x86.ActiveCfg = Release|Any CPU
 		{ABA74929-F1AA-43FB-A9A6-3A5B3A4CEEC6}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A3A38C4-B378-4A6D-88E8-E1FBF181F401}
 	EndGlobalSection
 EndGlobal

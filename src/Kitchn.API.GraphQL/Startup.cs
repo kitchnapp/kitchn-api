@@ -8,7 +8,7 @@ using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.Extensions.Logging;
 using GraphQL.Server.Ui.Playground;
-using Kitchn.Data;
+using Kitchn.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;

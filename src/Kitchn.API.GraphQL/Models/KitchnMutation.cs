@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
-using Kitchn.Data;
+using Kitchn.API.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models
@@ -95,7 +95,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					measurement.Id = Guid.NewGuid();
 
-					dbContext.Measurements.Add(new Kitchn.Data.Models.Measurement
+					dbContext.Measurements.Add(new Kitchn.API.Data.Models.Measurement
 					{
 						Id = measurement.Id,
 						Name = measurement.Name,
@@ -173,7 +173,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					chore.Id = Guid.NewGuid();
 
-					dbContext.Chores.Add(new Kitchn.Data.Models.Chore
+					dbContext.Chores.Add(new Kitchn.API.Data.Models.Chore
 					{
 						Id = chore.Id,
 						Title = chore.Title,
@@ -251,7 +251,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					recipecategory.Id = Guid.NewGuid();
 
-					dbContext.RecipeCategories.Add(new Kitchn.Data.Models.RecipeCategory
+					dbContext.RecipeCategories.Add(new Kitchn.API.Data.Models.RecipeCategory
 					{
 						Id = recipecategory.Id,
 						Name = recipecategory.Name
@@ -327,7 +327,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					recipe.Id = Guid.NewGuid();
 
-					dbContext.Recipes.Add(new Kitchn.Data.Models.Recipe
+					dbContext.Recipes.Add(new Kitchn.API.Data.Models.Recipe
 					{
 						Id = recipe.Id,
 						Name = recipe.Name,
@@ -443,7 +443,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					product.Id = Guid.NewGuid();
 
-					dbContext.Products.Add(new Kitchn.Data.Models.Product
+					dbContext.Products.Add(new Kitchn.API.Data.Models.Product
 					{
 						Id = product.Id,
 						Name = product.Name,
@@ -566,7 +566,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					stockeditem.Id = Guid.NewGuid();
 
-					dbContext.StockedItems.Add(new Kitchn.Data.Models.StockedItem
+					dbContext.StockedItems.Add(new Kitchn.API.Data.Models.StockedItem
 					{
 						Id = stockeditem.Id,
 						ProductId = stockeditem.ProductId.Value,
@@ -653,7 +653,7 @@ namespace Kitchn.API.GraphQL.Models
 
 					battery.Id = Guid.NewGuid();
 
-					var dbBattery = mapper.Map<Kitchn.Data.Models.Battery>(battery);
+					var dbBattery = mapper.Map<Kitchn.API.Data.Models.Battery>(battery);
 
 					dbContext.Batteries.Add(dbBattery);
 					dbContext.SaveChanges();

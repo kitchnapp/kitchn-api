@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using GraphQL;
 using GraphQL.Types;
-using Kitchn.Data;
+using Kitchn.API.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models.Measurements

@@ -2,7 +2,7 @@ using System.Linq;
 using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
-using Kitchn.Data;
+using Kitchn.API.Data;
 
 namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 {

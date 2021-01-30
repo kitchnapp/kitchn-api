@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Kitchn.API.GraphQL;
-using Kitchn.Data;
+using Kitchn.API.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
