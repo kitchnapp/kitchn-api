@@ -2,6 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UserSecretsId>0ba93f5a-e0ed-4560-b586-e73110fb5452</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,6 +18,7 @@
 		<PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.5.0-alpha0073" />
 		<PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.5.0-alpha0073" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
 	</ItemGroup>
 

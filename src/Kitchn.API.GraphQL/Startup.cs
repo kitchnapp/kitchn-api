@@ -14,6 +14,10 @@ using Microsoft.Extensions.Configuration;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace Kitchn.API.GraphQL
 {
@@ -26,8 +30,6 @@ namespace Kitchn.API.GraphQL
 			Configuration = configuration;
 		}
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors(options =>
@@ -60,6 +62,14 @@ namespace Kitchn.API.GraphQL
 			services.AddIdentity<IdentityUser, IdentityRole>()
 				.AddEntityFrameworkStores<KitchnDbContext>()
 				.AddDefaultTokenProviders();
+
+			services.ConfigureApplicationCookie(options =>
+			{
+				// Cookie settings
+				options.Cookie.HttpOnly = false;
+				options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+				options.SlidingExpiration = true;
+			});
 
 			services.AddAuthentication();
 			services.AddAuthorization();
@@ -116,6 +126,22 @@ namespace Kitchn.API.GraphQL
 			{
 				// use graphql-playground middleware at default url /ui/voyager
 				app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+			}
+
+			if (true)
+			{
+				var optionsBuilder = new DbContextOptionsBuilder<KitchnDbContext>();
+				optionsBuilder.UseNpgsql(Configuration["ConnectionStrings:KitchnDb"]);
+
+				ApplyMigrations(new KitchnDbContext(optionsBuilder.Options));
+			}
+		}
+
+		public void ApplyMigrations(KitchnDbContext context)
+		{
+			if (context.Database.GetPendingMigrations().Any())
+			{
+				context.Database.Migrate();
 			}
 		}
 	}

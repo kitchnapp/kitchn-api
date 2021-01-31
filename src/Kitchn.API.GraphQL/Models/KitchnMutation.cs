@@ -4,13 +4,14 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models
 {
 	public class KitchnMutation : ObjectGraphType
 	{
-		public KitchnMutation(KitchnDbContext dbContext, IMapper mapper)
+		public KitchnMutation(KitchnDbContext dbContext, IMapper mapper, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
 		{
 			Field<Locations.LocationType>(
 				"createLocation",
@@ -749,6 +750,67 @@ namespace Kitchn.API.GraphQL.Models
 					dbContext.SaveChanges();
 
 					return mapper.Map<StockedItems.StockedItem>(dbStockedItem);
+				}
+			);
+
+			Field<Auth.UserType>(
+				"login",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "username" },
+					new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "password" }
+				),
+				resolve: context =>
+				{
+					var username = context.GetArgument<string>("username");
+					var password = context.GetArgument<string>("password");
+
+					var result = signInManager.PasswordSignInAsync(username, password, true, lockoutOnFailure: true).Result;
+
+					if (result.Succeeded)
+					{
+						var user = userManager.FindByNameAsync(username).Result;
+
+						return new Auth.User
+						{
+							Username = user.UserName,
+							Email = user.Email,
+							Id = user.Id
+						};
+					}
+					else
+					{
+						return null;
+					}
+				}
+			);
+
+			Field<Auth.UserType>(
+				"register",
+				arguments: new QueryArguments(
+					new QueryArgument<NonNullGraphType<Auth.CreateUserInputType>> { Name = "user" }
+				),
+				resolve: context =>
+				{
+					var newUser = context.GetArgument<Auth.User>("user");
+
+					var user = new IdentityUser { UserName = newUser.Username, Email = newUser.Email };
+					var result = userManager.CreateAsync(user, newUser.Password).Result;
+
+					if (result.Succeeded)
+					{
+						var foundUser = userManager.FindByNameAsync(newUser.Username).Result;
+
+						return new Auth.User
+						{
+							Username = foundUser.UserName,
+							Email = foundUser.Email,
+							Id = foundUser.Id
+						};
+					}
+					else
+					{
+						return null;
+					}
 				}
 			);
 		}

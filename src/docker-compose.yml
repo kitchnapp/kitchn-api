@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  db:
+    container_name: Kitchn_Database
+    image: postgres
+    environment:
+      # The password for the postgres image.
+      POSTGRES_PASSWORD: password
+    restart: unless-stopped
+
+  kitchn.api.graphql:
+    links:
+      - db
+    depends_on:
+      - db
+    image: ${DOCKER_REGISTRY-}kitchnapigraphql
+    build:
+      context: .
+      dockerfile: Kitchn.API.GraphQL/Dockerfile
+    environment:
+      # By default, the database is the same as the username.
+      ConnectionStrings__KitchnDb: Host=db;Database=postgres;Username=postgres;Password=password
+      # Cors__Policy can be `AllowAll` or `AllowSpecific`.
+      #   If Cors__Policy is set to `AllowSpecific`, only the origins specified in
+      #   `Cors__Origins` will be allowed to access the Kitchn API resource.
+      Cors__Policy: AllowAll
+      Cors__Origins: "http://localhost;https://localhost"
+      # GraphQL debugging endpoints
+      #   Values can be "true" or "false"
+      GraphQL__Playground: "true"
+      GraphQL__Altair: "true"
+      GraphQL__Voyager: "true"
