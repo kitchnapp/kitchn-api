@@ -88,7 +88,8 @@ namespace Kitchn.API.GraphQL
 				.AddGraphTypes(ServiceLifetime.Scoped)
 				.AddSystemTextJson(deserializerSettings => { }, serializerSettings => { }) // For .NET Core 3+
 				.AddDataLoader() // Add required services for DataLoader support
-				.AddGraphTypes(typeof(KitchnSchema));
+				.AddGraphTypes(typeof(KitchnSchema))
+				.AddGraphQLAuthorization();
 
 			services.AddAutoMapper(typeof(Startup));
 		}
