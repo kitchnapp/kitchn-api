@@ -3,15 +3,13 @@ version: '3.4'
 services:
   db:
     container_name: Kitchn_Database
-    image: postgres
+    image: postgres:13
     environment:
       # The password for the postgres image.
       POSTGRES_PASSWORD: password
     restart: unless-stopped
 
   kitchn.api.graphql:
-    links:
-      - db
     depends_on:
       - db
     image: ${DOCKER_REGISTRY-}kitchnapigraphql
