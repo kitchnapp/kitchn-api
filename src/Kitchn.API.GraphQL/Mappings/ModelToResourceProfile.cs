@@ -6,17 +6,17 @@ namespace Kitchn.API.GraphQL.Mappings
 	{
 		public ModelToResourceProfile()
 		{
-			CreateMap<Data.Models.Battery, GraphQL.Models.Batteries.Battery>();
-			CreateMap<Data.Models.Chore, GraphQL.Models.Chores.Chore>();
-			CreateMap<Data.Models.Location, GraphQL.Models.Locations.Location>();
-			CreateMap<Data.Models.MeasurementConversion, GraphQL.Models.MeasurementConversions.MeasurementConversion>();
-			CreateMap<Data.Models.Measurement, GraphQL.Models.Measurements.Measurement>();
-			CreateMap<Data.Models.ProductBarcode, GraphQL.Models.ProductBarcodes.ProductBarcode>();
-			CreateMap<Data.Models.Product, GraphQL.Models.Products.Product>();
-			CreateMap<Data.Models.RecipeCategory, GraphQL.Models.RecipeCategories.RecipeCategory>();
-			CreateMap<Data.Models.RecipeInstruction, GraphQL.Models.RecipeInstructions.RecipeInstruction>();
-			CreateMap<Data.Models.Recipe, GraphQL.Models.Recipes.Recipe>();
-			CreateMap<Data.Models.StockedItem, GraphQL.Models.StockedItems.StockedItem>();
+			CreateMap<Data.Models.Battery, Services.Models.Battery>();
+			CreateMap<Data.Models.Chore, Services.Models.Chore>();
+			CreateMap<Data.Models.Location, Services.Models.Location>();
+			CreateMap<Data.Models.MeasurementConversion, Services.Models.MeasurementConversion>();
+			CreateMap<Data.Models.Measurement, Services.Models.Measurement>();
+			CreateMap<Data.Models.ProductBarcode, Services.Models.ProductBarcode>();
+			CreateMap<Data.Models.Product, Services.Models.Product>();
+			CreateMap<Data.Models.RecipeCategory, Services.Models.RecipeCategory>();
+			CreateMap<Data.Models.RecipeInstruction, Services.Models.RecipeInstruction>();
+			CreateMap<Data.Models.Recipe, Services.Models.Recipe>();
+			CreateMap<Data.Models.StockedItem, Services.Models.StockedItem>();
 		}
 	}
 }

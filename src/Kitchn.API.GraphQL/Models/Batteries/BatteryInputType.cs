@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using Kitchn.API.Services.Models;
 
 namespace Kitchn.API.GraphQL.Models.Batteries
 {

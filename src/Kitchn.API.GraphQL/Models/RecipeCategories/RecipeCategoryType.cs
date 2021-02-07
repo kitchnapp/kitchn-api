@@ -4,6 +4,7 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Kitchn.API.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models.RecipeCategories
@@ -21,7 +22,7 @@ namespace Kitchn.API.GraphQL.Models.RecipeCategories
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Models.Recipes.RecipeType>>>>("recipes", "The recipes in this category.",
 				resolve: context =>
 				{
-					return mapper.Map<IEnumerable<Recipes.Recipe>>(
+					return mapper.Map<IEnumerable<Recipe>>(
 						dbContext.Recipes
 							.Include(q => q.Categories)
 							.Where(q => q.Categories.Where(q => q.RecipeCategoryId == context.Source.Id).Any())

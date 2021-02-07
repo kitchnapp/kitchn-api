@@ -3,7 +3,7 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
-using Microsoft.EntityFrameworkCore;
+using Kitchn.API.Services.Models;
 
 namespace Kitchn.API.GraphQL.Models.StockedItems
 {
@@ -22,7 +22,7 @@ namespace Kitchn.API.GraphQL.Models.StockedItems
 			Field<Products.ProductType>("product", "The stocked product.",
 				resolve: context =>
 				{
-					return mapper.Map<Products.Product>(
+					return mapper.Map<Product>(
 						dbContext.Products
 							.Where(q => q.Id == context.Source.ProductId)
 							.FirstOrDefault()
@@ -33,7 +33,7 @@ namespace Kitchn.API.GraphQL.Models.StockedItems
 			Field<Locations.LocationType>("location", "Where the stocked product is located.",
 				resolve: context =>
 				{
-					return mapper.Map<Locations.Location>(
+					return mapper.Map<Location>(
 						dbContext.Locations
 							.Where(q => q.Id == context.Source.LocationId)
 							.FirstOrDefault()

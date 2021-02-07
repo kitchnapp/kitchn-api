@@ -1,6 +1,6 @@
 using System;
 
-namespace Kitchn.API.GraphQL.Models.RecipeInstructions
+namespace Kitchn.API.Services.Models
 {
 	public class RecipeInstruction
 	{

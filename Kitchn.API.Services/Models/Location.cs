@@ -1,8 +1,8 @@
 using System;
 
-namespace Kitchn.API.GraphQL.Models.RecipeCategories
+namespace Kitchn.API.Services.Models
 {
-	public class RecipeCategory
+	public class Location
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }

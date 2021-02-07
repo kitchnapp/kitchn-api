@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kitchn.API.GraphQL.Models.Auth
+namespace Kitchn.API.Services.Models
 {
 	public class User
 	{

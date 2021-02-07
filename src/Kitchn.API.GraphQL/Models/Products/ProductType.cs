@@ -4,6 +4,7 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Kitchn.API.Services.Models;
 
 namespace Kitchn.API.GraphQL.Models.Products
 {
@@ -23,7 +24,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<Locations.LocationType>("defaultLocation", "The default location for the product.",
 				resolve: context =>
 				{
-					return mapper.Map<Locations.Location>(
+					return mapper.Map<Location>(
 						dbContext.Locations
 							.Where(q => q.Id == context.Source.DefaultLocationId)
 							.FirstOrDefault()
@@ -34,7 +35,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<StockedItems.StockedItemType>>>>("stockedItems", "The stocked items of the product.",
 				resolve: context =>
 				{
-					return mapper.Map<IEnumerable<StockedItems.StockedItem>>(
+					return mapper.Map<IEnumerable<StockedItem>>(
 						dbContext.StockedItems
 							.Where(q => q.ProductId == context.Source.Id)
 					);
@@ -44,7 +45,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<ProductBarcodes.ProductBarcodeType>>>>("barcodes", "The barcodes for the product.",
 				resolve: context =>
 				{
-					return mapper.Map<IEnumerable<ProductBarcodes.ProductBarcode>>(
+					return mapper.Map<IEnumerable<ProductBarcode>>(
 						dbContext.ProductBarcodes
 							.Where(q => q.ProductId == context.Source.Id)
 					);
@@ -54,7 +55,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<Measurements.MeasurementType>("individualMeasurement", "The individual measurement for the product.",
 				resolve: context =>
 				{
-					return mapper.Map<Measurements.Measurement>(
+					return mapper.Map<Measurement>(
 						dbContext.Measurements
 							.FirstOrDefault(q => q.Id == context.Source.IndividualMeasurementId)
 					);
@@ -64,7 +65,7 @@ namespace Kitchn.API.GraphQL.Models.Products
 			Field<Measurements.MeasurementType>("groupMeasurement", "The group measurement for the product.",
 				resolve: context =>
 				{
-					return mapper.Map<Measurements.Measurement>(
+					return mapper.Map<Measurement>(
 						dbContext.Measurements
 							.FirstOrDefault(q => q.Id == context.Source.GroupMeasurementId)
 					);

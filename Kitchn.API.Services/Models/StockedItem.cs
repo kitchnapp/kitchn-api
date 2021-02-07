@@ -1,6 +1,6 @@
 using System;
 
-namespace Kitchn.API.GraphQL.Models.StockedItems
+namespace Kitchn.API.Services.Models
 {
 	public class StockedItem
 	{

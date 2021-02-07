@@ -1,4 +1,5 @@
 ﻿using GraphQL.Types;
+using Kitchn.API.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

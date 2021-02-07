@@ -3,6 +3,7 @@ using System.Linq;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Kitchn.API.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models.Measurements
@@ -52,9 +53,9 @@ namespace Kitchn.API.GraphQL.Models.Measurements
 				});
 		}
 
-		private static MeasurementConversions.MeasurementConversion ConvertDbModelToMeasurement(Data.Models.MeasurementConversion dbMeasurementConversion, Guid sourceId)
+		private static MeasurementConversion ConvertDbModelToMeasurement(Data.Models.MeasurementConversion dbMeasurementConversion, Guid sourceId)
 		{
-			return new MeasurementConversions.MeasurementConversion
+			return new MeasurementConversion
 			{
 				Id = dbMeasurementConversion.Id,
 				ToMeasurementId = dbMeasurementConversion.ToMeasurementId == sourceId ? dbMeasurementConversion.FromMeasurementId : dbMeasurementConversion.ToMeasurementId,

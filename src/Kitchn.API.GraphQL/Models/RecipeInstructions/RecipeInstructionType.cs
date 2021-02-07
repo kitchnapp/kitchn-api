@@ -3,6 +3,7 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Kitchn.API.Services.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kitchn.API.GraphQL.Models.RecipeInstructions
@@ -21,7 +22,7 @@ namespace Kitchn.API.GraphQL.Models.RecipeInstructions
 			Field<Models.Recipes.RecipeType>("recipe", "The recipe for this instruction.",
 				resolve: context =>
 				{
-					return mapper.Map<Recipes.Recipe>(
+					return mapper.Map<Recipe>(
 						dbContext.Recipes
 							.Where(q => q.Id == context.Source.RecipeId)
 							.FirstOrDefault()

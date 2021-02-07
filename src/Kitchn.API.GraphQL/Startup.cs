@@ -18,6 +18,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using Microsoft.AspNetCore.CookiePolicy;
+using Kitchn.API.Services.Repositories;
+using Kitchn.API.Services.Interfaces;
+using Kitchn.API.Services.Models;
 
 namespace Kitchn.API.GraphQL
 {
@@ -77,6 +80,11 @@ namespace Kitchn.API.GraphQL
 			services.AddScoped<KitchnQuery>();
 			services.AddScoped<KitchnMutation>();
 			services.AddScoped<KitchnSchema>();
+
+			services.AddScoped<IRepository<Battery>, BatteryRepository>();
+			services.AddScoped<IRepository<Chore>, ChoreRepository>();
+			services.AddScoped<IRepository<Location>, LocationRepository>();
+			services.AddScoped<IRepository<StockedItem>, StockedItemRepository>();
 
 			services
 				.AddGraphQL((options, provider) =>

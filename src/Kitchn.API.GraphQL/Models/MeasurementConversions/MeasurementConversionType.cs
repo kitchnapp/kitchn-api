@@ -3,6 +3,7 @@ using AutoMapper;
 using GraphQL;
 using GraphQL.Types;
 using Kitchn.API.Data;
+using Kitchn.API.Services.Models;
 
 namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 {
@@ -19,7 +20,7 @@ namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 			Field<Measurements.MeasurementType>("toMeasurement", "The measurement to convert from",
 				resolve: context =>
 				{
-					return mapper.Map<Measurements.Measurement>(
+					return mapper.Map<Measurement>(
 						dbContext.Measurements
 							.Where(o => o.Id == context.Source.ToMeasurementId)
 							.FirstOrDefault()
@@ -29,7 +30,7 @@ namespace Kitchn.API.GraphQL.Models.MeasurementConversions
 			Field<Measurements.MeasurementType>("fromMeasurement", "The measurement to convert from",
 				resolve: context =>
 				{
-					return mapper.Map<Measurements.Measurement>(
+					return mapper.Map<Measurement>(
 						dbContext.Measurements
 							.Where(o => o.Id == context.Source.FromMeasurementId)
 							.FirstOrDefault()
