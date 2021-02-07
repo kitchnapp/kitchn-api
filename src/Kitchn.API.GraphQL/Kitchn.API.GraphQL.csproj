@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Kitchn.API.Services\Kitchn.API.Services.csproj" />
+		<ProjectReference Include="..\Kitchn.API.Services\Kitchn.API.Services.csproj" />
 		<ProjectReference Include="..\Kitchn.API.Data\Kitchn.API.Data.csproj" />
 	</ItemGroup>
 

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchn.API.GraphQL.Tests", 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3D4440CD-2811-4E47-99A0-F453DF23D85E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchn.API.Services", "..\Kitchn.API.Services\Kitchn.API.Services.csproj", "{95BEFD4D-767E-479D-A1E9-F2E66B30DF1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchn.API.Services", "Kitchn.API.Services\Kitchn.API.Services.csproj", "{95BEFD4D-767E-479D-A1E9-F2E66B30DF1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

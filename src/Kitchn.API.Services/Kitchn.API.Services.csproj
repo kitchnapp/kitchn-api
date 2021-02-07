@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Kitchn.API.Data\Kitchn.API.Data.csproj" />
+    <ProjectReference Include="..\Kitchn.API.Data\Kitchn.API.Data.csproj" />
   </ItemGroup>
 
 </Project>
