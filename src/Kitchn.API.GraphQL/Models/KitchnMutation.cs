@@ -21,7 +21,8 @@ namespace Kitchn.API.GraphQL.Models
 			IRepository<Battery> batteryRepository,
 			IRepository<Chore> choreRepository,
 			IRepository<Location> locationRepository,
-			IRepository<StockedItem> stockedItemRepository
+			IRepository<StockedItem> stockedItemRepository,
+			IRepository<Recipe> recipeRepository
 		){
 			Field<Locations.LocationType>(
 				"createLocation",
