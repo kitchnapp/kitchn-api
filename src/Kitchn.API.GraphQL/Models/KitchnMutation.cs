@@ -22,7 +22,8 @@ namespace Kitchn.API.GraphQL.Models
 			IRepository<Chore> choreRepository,
 			IRepository<Location> locationRepository,
 			IRepository<StockedItem> stockedItemRepository,
-			IRepository<Recipe> recipeRepository
+			IRepository<Recipe> recipeRepository,
+			IRepository<Measurement> measurementRepository
 		){
 			Field<Locations.LocationType>(
 				"createLocation",
@@ -80,17 +81,7 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var measurement = context.GetArgument<Measurement>("measurement");
 
-					measurement.Id = Guid.NewGuid();
-
-					dbContext.Measurements.Add(new Kitchn.API.Data.Models.Measurement
-					{
-						Id = measurement.Id,
-						Name = measurement.Name,
-						MultipleName = measurement.MultipleName
-					});
-					dbContext.SaveChanges();
-
-					return measurement;
+					return measurementRepository.AddAsync(measurement).Result;
 				}
 			);
 
@@ -105,22 +96,9 @@ namespace Kitchn.API.GraphQL.Models
 					var id = context.GetArgument<Guid>("id");
 					var measurement = context.GetArgument<Measurement>("measurement");
 
-					var dbMeasurement = dbContext.Measurements
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					measurement.Id = id;
 
-					if (dbMeasurement == null)
-					{
-						return null;
-					}
-
-					dbMeasurement.Name = measurement.Name ?? dbMeasurement.Name;
-					dbMeasurement.MultipleName = measurement.MultipleName ?? dbMeasurement.MultipleName;
-
-					dbContext.Measurements.Update(dbMeasurement);
-					dbContext.SaveChanges();
-
-					return mapper.Map<Measurement>(dbMeasurement);
+					return measurementRepository.UpdateAsync(measurement).Result;
 				}
 			);
 
@@ -133,19 +111,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					var dbMeasurement = dbContext.Measurements
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					var measurement = new Measurement { Id = id };
 
-					if (dbMeasurement == null)
-					{
-						return null;
-					}
+					measurementRepository.DeleteAsync(measurement);
 
-					dbContext.Remove(dbMeasurement);
-					dbContext.SaveChanges();
-
-					return mapper.Map<Measurement>(dbMeasurement);
+					return measurement;
 				}
 			);
 
@@ -281,18 +251,7 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var recipe = context.GetArgument<Recipe>("recipe");
 
-					recipe.Id = Guid.NewGuid();
-
-					dbContext.Recipes.Add(new Kitchn.API.Data.Models.Recipe
-					{
-						Id = recipe.Id,
-						Name = recipe.Name,
-						Description = recipe.Description,
-						Rating = recipe.Rating
-					});
-					dbContext.SaveChanges();
-
-					return recipe;
+					return recipeRepository.AddAsync(recipe).Result;
 				}
 			);
 
@@ -307,23 +266,9 @@ namespace Kitchn.API.GraphQL.Models
 					var id = context.GetArgument<Guid>("id");
 					var recipe = context.GetArgument<Recipe>("recipe");
 
-					var dbRecipe = dbContext.Recipes
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					recipe.Id = id;
 
-					if (dbRecipe == null)
-					{
-						return null;
-					}
-
-					dbRecipe.Name = recipe.Name ?? dbRecipe.Name;
-					dbRecipe.Description = recipe.Description ?? dbRecipe.Description;
-					dbRecipe.Rating = recipe.Rating ?? dbRecipe.Rating;
-
-					dbContext.Recipes.Update(dbRecipe);
-					dbContext.SaveChanges();
-
-					return mapper.Map<Recipe>(dbRecipe);
+					return recipeRepository.UpdateAsync(recipe).Result;
 				}
 			);
 
@@ -336,19 +281,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					var dbRecipe = dbContext.Recipes
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					var recipe = new Recipe { Id = id };
 
-					if (dbRecipe == null)
-					{
-						return null;
-					}
+					recipeRepository.DeleteAsync(recipe);
 
-					dbContext.Remove(dbRecipe);
-					dbContext.SaveChanges();
-
-					return mapper.Map<Recipe>(dbRecipe);
+					return recipe;
 				}
 			);
 

@@ -86,6 +86,7 @@ namespace Kitchn.API.GraphQL
 			services.AddScoped<IRepository<Location>, LocationRepository>();
 			services.AddScoped<IRepository<StockedItem>, StockedItemRepository>();
 			services.AddScoped<IRepository<Recipe>, RecipeRepository>();
+			services.AddScoped<IRepository<Measurement>, MeasurementRepository>();
 
 			services
 				.AddGraphQL((options, provider) =>
