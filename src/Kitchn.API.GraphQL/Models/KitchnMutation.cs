@@ -23,6 +23,7 @@ namespace Kitchn.API.GraphQL.Models
 			IRepository<Location> locationRepository,
 			IRepository<StockedItem> stockedItemRepository,
 			IRepository<Recipe> recipeRepository,
+			IRepository<RecipeCategory> recipeCategoryRepository,
 			IRepository<Measurement> measurementRepository
 		){
 			Field<Locations.LocationType>(
@@ -173,18 +174,9 @@ namespace Kitchn.API.GraphQL.Models
 				),
 				resolve: context =>
 				{
-					var recipecategory = context.GetArgument<RecipeCategory>("recipecategory");
+					var recipeCategory = context.GetArgument<RecipeCategory>("recipecategory");
 
-					recipecategory.Id = Guid.NewGuid();
-
-					dbContext.RecipeCategories.Add(new Kitchn.API.Data.Models.RecipeCategory
-					{
-						Id = recipecategory.Id,
-						Name = recipecategory.Name
-					});
-					dbContext.SaveChanges();
-
-					return recipecategory;
+					return recipeCategoryRepository.AddAsync(recipeCategory).Result;
 				}
 			);
 
@@ -199,21 +191,9 @@ namespace Kitchn.API.GraphQL.Models
 					var id = context.GetArgument<Guid>("id");
 					var recipecategory = context.GetArgument<RecipeCategory>("recipecategory");
 
-					var dbRecipeCategory = dbContext.RecipeCategories
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					recipecategory.Id = id;
 
-					if (dbRecipeCategory == null)
-					{
-						return null;
-					}
-
-					dbRecipeCategory.Name = recipecategory.Name ?? dbRecipeCategory.Name;
-
-					dbContext.RecipeCategories.Update(dbRecipeCategory);
-					dbContext.SaveChanges();
-
-					return mapper.Map<RecipeCategory>(dbRecipeCategory);
+					return recipeCategoryRepository.UpdateAsync(recipecategory).Result;
 				}
 			);
 
@@ -226,19 +206,11 @@ namespace Kitchn.API.GraphQL.Models
 				{
 					var id = context.GetArgument<Guid>("id");
 
-					var dbRecipeCategory = dbContext.RecipeCategories
-						.Where(q => q.Id == id)
-						.FirstOrDefault();
+					var recipecategory = new RecipeCategory { Id = id };
 
-					if (dbRecipeCategory == null)
-					{
-						return null;
-					}
+					recipeCategoryRepository.DeleteAsync(recipecategory);
 
-					dbContext.Remove(dbRecipeCategory);
-					dbContext.SaveChanges();
-
-					return mapper.Map<RecipeCategory>(dbRecipeCategory);
+					return recipecategory;
 				}
 			);
 
