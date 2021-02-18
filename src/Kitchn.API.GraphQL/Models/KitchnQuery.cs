@@ -20,7 +20,9 @@ namespace Kitchn.API.GraphQL.Models
 			IRepository<Chore> choreRepository,
 			IRepository<Location> locationRepository,
 			IRepository<StockedItem> stockedItemRepository,
-			IRepository<Recipe> recipeRepository
+			IRepository<Recipe> recipeRepository,
+			IRepository<RecipeCategory> recipeCategoryRepository,
+			IRepository<Measurement> measurementRepository
 		){
 			Field<NonNullGraphType<ListGraphType<NonNullGraphType<Products.ProductType>>>>(
 				"products",
@@ -60,9 +62,7 @@ namespace Kitchn.API.GraphQL.Models
 				"Get a list of measurements",
 				resolve: context =>
 				{
-					return mapper.Map<IEnumerable<Measurement>>(
-						dbContext.Measurements
-					);
+					return measurementRepository.GetAsync().Result;
 				}
 			);
 
@@ -89,9 +89,7 @@ namespace Kitchn.API.GraphQL.Models
 				"Get a list of recipe categories",
 				resolve: context =>
 				{
-					return mapper.Map<IEnumerable<RecipeCategory>>(
-						dbContext.RecipeCategories
-					);
+					return recipeCategoryRepository.GetAsync().Result;
 				}
 			);
 

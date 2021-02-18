@@ -40,7 +40,7 @@ namespace Kitchn.API.Services.Repositories
 			if (item.Id != default)
 				throw new ArgumentException("Measurement ID cannot have a value");
 			if (string.IsNullOrEmpty(item.Name))
-				throw new ArgumentException("Measurement title cannot be null");
+				throw new ArgumentException("Measurement name cannot be null");
 
 			var dbMeasurement = _mapper.Map<Data.Models.Measurement>(item);
 

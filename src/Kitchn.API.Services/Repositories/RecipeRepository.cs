@@ -40,7 +40,7 @@ namespace Kitchn.API.Services.Repositories
 			if (item.Id != default)
 				throw new ArgumentException("Recipe ID cannot have a value");
 			if (string.IsNullOrEmpty(item.Name))
-				throw new ArgumentException("Recipe title cannot be null");
+				throw new ArgumentException("Recipe name cannot be null");
 
 			var dbRecipe = _mapper.Map<Data.Models.Recipe>(item);
 
